@@ -24,10 +24,10 @@ int main()
 
     win = mlx_new_window(mlx, width, height, "My first MLX window");
 
-
+	for (int i = 0; i < 100; i++)
+		mlx_pixel_put(mlx, win, 100 + i, 100 + i, 0xFFFFFF);
     mlx_loop(mlx);
 
-    return 0;
 	return (0);
 }
 //cc main.c -Imlx_linux -lXext -lX11 -lm -lz minilibx-linux/libmlx.a

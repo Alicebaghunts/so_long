@@ -6,7 +6,7 @@
 /*   By: alisharu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 13:52:09 by alisharu          #+#    #+#             */
-/*   Updated: 2025/04/22 18:03:27 by alisharu         ###   ########.fr       */
+/*   Updated: 2025/04/22 19:05:12 by alisharu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ void	render_map(t_map *map)
 	int		y;
 
 	mlx = mlx_init();
-	win = mlx_new_window(mlx, map->width * 64, map->height * 64, "so_long");
+	win = mlx_new_window(mlx, map->width * 65, map->height * 65, "so_long");
 	wall_img = mlx_xpm_file_to_image(mlx,
-			"textures/sprite_0_16.xpm", &img_width, &img_height);
+			"textures/sprite_1_2-resized.xpm", &img_width, &img_height);
 
 	y = 0;
 	while (y < map->height)
@@ -35,7 +35,7 @@ void	render_map(t_map *map)
 		while (x < map->width)
 		{
 			if (map->map[y][x] == '1')
-				mlx_put_image_to_window(mlx, win, wall_img, x * 64, y * 64);
+				mlx_put_image_to_window(mlx, win, wall_img, x * 65, y * 65);
 			x++;
 		}
 		y++;

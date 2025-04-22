@@ -3,17 +3,45 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alisharu <marvin@42.fr>                    #+#  +:+       +#+        */
+/*   By: alisharu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-04-19 13:52:09 by alisharu          #+#    #+#             */
-/*   Updated: 2025-04-19 13:52:09 by alisharu         ###   ########.fr       */
+/*   Created: 2025/04/19 13:52:09 by alisharu          #+#    #+#             */
+/*   Updated: 2025/04/22 18:03:27 by alisharu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mlx.h"
 #include "so_long.h"
 
-#include "so_long.h"
+void	render_map(t_map *map)
+{
+	void	*mlx;
+	void	*win;
+	void	*wall_img;
+	int		img_width;
+	int		img_height;
+	int		x;
+	int		y;
+
+	mlx = mlx_init();
+	win = mlx_new_window(mlx, map->width * 64, map->height * 64, "so_long");
+	wall_img = mlx_xpm_file_to_image(mlx,
+			"textures/sprite_0_16.xpm", &img_width, &img_height);
+
+	y = 0;
+	while (y < map->height)
+	{
+		x = 0;
+		while (x < map->width)
+		{
+			if (map->map[y][x] == '1')
+				mlx_put_image_to_window(mlx, win, wall_img, x * 64, y * 64);
+			x++;
+		}
+		y++;
+	}
+	mlx_loop(mlx);
+}
 
 char	**resize_map(char **map, int *map_size)
 {
@@ -65,3 +93,4 @@ char	**read_in_map_file(int fd)
 	map[height] = NULL;
 	return (map);
 }
+

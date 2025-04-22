@@ -1,0 +1,25 @@
+/* XPM */
+static const char *sprite_2_19[] = {
+/* columns rows colors chars-per-pixel */
+"16 16 3 1 ",
+"  c #000001",
+". c #6B0800",
+"X c gray39",
+/* pixels */
+"                ",
+"XX            XX",
+" XX   XXX    XX ",
+"XXXX   X.X  XXXX",
+" XXX   XX   XXX ",
+"XXXXXX XX XXXXXX",
+"  X.XXXXXXXX.X  ",
+" XXX.XXXXXX.XXX ",
+"  XXXX.XX.XXXX  ",
+"  XXXXXXXXXXXX  ",
+"   XXX XX XXX   ",
+"       XX       ",
+"      XXXX      ",
+"    XXXXXXXX    ",
+"    XX XX XX    ",
+"                "
+};

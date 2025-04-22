@@ -1,0 +1,26 @@
+/* XPM */
+static const char *sprite_1_12[] = {
+/* columns rows colors chars-per-pixel */
+"16 16 4 1 ",
+"  c #000001",
+". c #00424A",
+"X c gray68",
+"o c white",
+/* pixels */
+" ...       o..  ",
+" oXoooooooo.XX  ",
+" ..XooXXXX....  ",
+" oXXoXooXX..XX  ",
+" ..XoXoX.X....  ",
+" oXXoXoX.X..XX  ",
+" ..XoXoX.X....  ",
+" oXXoXX..X..XX  ",
+" ..XooXXXX....  ",
+" oXXooXoX...XX  ",
+" ..oo..o......  ",
+" oXX  .o.  XXX  ",
+"       o        ",
+"       o        ",
+"       o        ",
+"       o        "
+};

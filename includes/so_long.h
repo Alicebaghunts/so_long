@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alisharu <marvin@42.fr>                    #+#  +:+       +#+        */
+/*   By: alisharu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-04-19 12:25:53 by alisharu          #+#    #+#             */
-/*   Updated: 2025-04-19 12:25:53 by alisharu         ###   ########.fr       */
+/*   Created: 2025/04/19 12:25:53 by alisharu          #+#    #+#             */
+/*   Updated: 2025/04/22 15:13:08 by alisharu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,15 @@ int		checking_walls(t_map *map);
 int		checking_exits(t_map *map);
 int		checking_coins(t_map *map);
 int		checking_all_characters(t_map *map);
+//
+void	fill_exit(char **map, int x, int y);
+void	fill_coin(char **map, int x, int y, int *coin_count);
+char	**copy_map(t_map *map);
+int		is_exit_reachable(t_game *game);
+int		has_minimum_two_coins(t_game *game);
+void	find_player_position(t_game *game);
+void	print_map(char **map, int height);
+void	render_map(t_map *map);
 
 
 

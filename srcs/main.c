@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alisharu <marvin@42.fr>                    #+#  +:+       +#+        */
+/*   By: alisharu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-04-18 15:19:34 by alisharu          #+#    #+#             */
-/*   Updated: 2025-04-18 15:19:34 by alisharu         ###   ########.fr       */
+/*   Created: 2025/04/18 15:19:34 by alisharu          #+#    #+#             */
+/*   Updated: 2025/04/22 15:26:56 by alisharu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,31 @@ void	error_handling(int num)
 	exit(num);
 }
 
+void	error_handling_map(t_map *map, int fd)
+{
+	close(fd);
+	ft_free_matrix(map->map);
+	free(map);
+	error_handling(INVALID_MAP);
+}
+
+void	checking(t_map *map, int fd)
+{
+	if (is_rectangular(map) == 0)
+		error_handling_map(map, fd);
+	if (checking_walls(map) == 0)
+		error_handling_map(map, fd);
+	if (checking_exits(map) == 0)
+		error_handling_map(map, fd);
+	if (checking_coins(map) == 0)
+		error_handling_map(map, fd);
+	if (checking_all_characters(map) == 0)
+		error_handling_map(map, fd);
+	// close(fd);
+	// ft_free_matrix(map->map);
+	// free(map);
+}
+
 int	main(int argc, char **argv)
 {
 	t_map	*map;
@@ -43,48 +68,13 @@ int	main(int argc, char **argv)
 	map_array = read_in_map_file(fd);
 	map = (t_map *)malloc(sizeof(t_map));
 	if (!map)
-	error_handling(MALLOC_ERROR);
+		error_handling(MALLOC_ERROR);
 	map->map = map_array;
 	printf("map_array\n\n");
 	print_matrix(map->map);
 	init_map_first(map, find_width(map), find_height(map));
-	if (is_rectangular(map) == 0)
-		error_handling(INVALID_MAP);
-	//
-	if(checking_walls(map) == 0)
-	{
-		close(fd);
-		ft_free_matrix(map->map);
-		free(map);
-		error_handling(INVALID_MAP);
-	}
-	//
-	if(checking_exits(map) == 0)
-	{
-		close(fd);
-		ft_free_matrix(map->map);
-		free(map);
-		error_handling(INVALID_MAP);
-	}
-	//
-	if(checking_coins(map) == 0)
-	{
-		close(fd);
-		ft_free_matrix(map->map);
-		free(map);
-		error_handling(INVALID_MAP);
-	}
-	//
-	if(checking_all_characters(map) == 0)
-	{
-		close(fd);
-		ft_free_matrix(map->map);
-		free(map);
-		error_handling(INVALID_MAP);
-	}
-	close(fd);
-	ft_free_matrix(map->map);
-	free(map);
-
+	printf("width -> %d\nheight - > %d\n", find_width(map), find_height(map));
+	checking(map, fd);
+	render_map(map);
 	return (0);
 }

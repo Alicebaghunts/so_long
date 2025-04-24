@@ -6,7 +6,7 @@
 /*   By: alisharu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 12:25:53 by alisharu          #+#    #+#             */
-/*   Updated: 2025/04/23 00:27:23 by alisharu         ###   ########.fr       */
+/*   Updated: 2025/04/24 20:29:58 by alisharu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ typedef struct s_images
 	void	*coin_kaska;
 	void	*coin_grandat;
 	void	*coin_lapata;
+	void	*coin_bomb;
 	void	*renesnace_1;
 	void	*renesnace_2;
 	void	*renesnace_3;
@@ -73,12 +74,6 @@ typedef struct s_images
 	void	*bom_1;
 	void	*bom_2;
 	void	*bom_3;
-	void	*bom_4;
-	void	*bom_5;
-	void	*bom_6;
-	void	*bom_7;
-	void	*bom_8;
-	void	*bom_9;
 }	t_images;
 
 typedef struct s_tank_images
@@ -131,7 +126,34 @@ int		has_minimum_two_coins(t_game *game);
 void	find_player_position(t_game *game);
 void	print_map(char **map, int height);
 void	render_map(t_map *map);
+//
+int		checking_valid_way_to_exit(t_map *map);
+int		checking_valid_way_to_coin(t_map *map);
+int		check_valid_path_to_coins(t_map *map);
+int		check_valid_path_to_exit(t_map *map);
+void	flood_fill(char **map, int startX, int startY, int **visited, t_map *m);
+//
 
-
-
+void	put_images_coin(t_images *images, void *mlx);
+void	put_images_renesince(t_images *images, void *mlx);
+void	put_images_water(t_images *images, void *mlx);
+void	put_images_kill(t_images *images, void *mlx);
+void	put_characters(t_images *images, void *mlx);
+void	put_wall(t_map *map, t_images *images, void *mlx, void *win);
+void	put_images(t_images *images, void *mlx);
+void	error_handling_map(t_map *map, int fd);
+//
 #endif
+
+
+
+//W - water
+//M - metal
+//B - bomb
+//L - lapata
+//Z - zvezda
+//K - kaska
+//T - tank
+//J - jam
+//E - exit
+//G - grass

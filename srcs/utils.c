@@ -6,7 +6,7 @@
 /*   By: alisharu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 13:50:30 by alisharu          #+#    #+#             */
-/*   Updated: 2025/04/23 18:54:48 by alisharu         ###   ########.fr       */
+/*   Updated: 2025/04/24 19:43:53 by alisharu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,16 +43,4 @@ void	ft_free_matrix(char **arr)
 	while (arr[i])
 		free(arr[i++]);
 	free(arr);
-}
-
-int	checking_argument(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] != '\0' && str[i] == ' ')
-		i++;
-	if (str[i] == '\0')
-		return (0);
-	return (1);
 }

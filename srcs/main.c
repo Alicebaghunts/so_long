@@ -6,7 +6,7 @@
 /*   By: alisharu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 15:19:34 by alisharu          #+#    #+#             */
-/*   Updated: 2025/04/22 20:59:49 by alisharu         ###   ########.fr       */
+/*   Updated: 2025/04/24 20:30:36 by alisharu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,14 @@
 #include "so_long.h"
 #include "mlx.h"
 #include "so_long.h"
+
+void	error_handling_map(t_map *map, int fd)
+{
+	close(fd);
+	ft_free_matrix(map->map);
+	free(map);
+	error_handling(INVALID_MAP);
+}
 
 void	error_handling(int num)
 {
@@ -31,33 +39,22 @@ void	error_handling(int num)
 	exit(num);
 }
 
-void	error_handling_map(t_map *map, int fd)
+void	put_images(t_images *images, void *mlx)
 {
-	close(fd);
-	ft_free_matrix(map->map);
-	free(map);
-	error_handling(INVALID_MAP);
-}
-
-void	checking(t_map *map, int fd)
-{
-	if (is_rectangular(map) == 0)
-		error_handling_map(map, fd);
-	if (checking_walls(map) == 0)
-		error_handling_map(map, fd);
-	if (checking_exits(map) == 0)
-		error_handling_map(map, fd);
-	if (checking_coins(map) == 0)
-		error_handling_map(map, fd);
-	if (checking_position(map) == 0)
-		error_handling_map(map, fd);
-	if (checking_all_characters(map) == 0)
-		error_handling_map(map, fd);
+	put_characters(images, mlx);
+	put_images_kill(images, mlx);
+	put_images_coin(images, mlx);
+	//put_images_tank(images, mlx);
+	//put_images_enemy(images, mlx);
+	put_images_water(images, mlx);
+	put_images_renesnace(images, mlx);
 }
 
 int	main(int argc, char **argv)
 {
 	t_map	*map;
+	t_images *img;
+	
 	int		fd;
 	char	**map_array;
 

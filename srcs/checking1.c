@@ -1,35 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   validation.c                                       :+:      :+:    :+:   */
+/*   checking1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alisharu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 12:45:02 by alisharu          #+#    #+#             */
-/*   Updated: 2025/04/22 21:01:19 by alisharu         ###   ########.fr       */
+/*   Updated: 2025/04/24 19:42:43 by alisharu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mlx.h"
 #include "so_long.h"
-
-int	is_rectangular(t_map *matrix)
-{
-	int	i;
-	int	len;
-
-	if (!matrix || !matrix->map || !matrix->map[0])
-		return (0);
-	i = 0;
-	len = ft_strlen(matrix->map[0]);
-	while (matrix->map[i])
-	{
-		if (ft_strlen(matrix->map[i]) != len)
-			return (0);
-		i++;
-	}
-	return (1);
-}
 
 int	checking_walls(t_map *map)
 {

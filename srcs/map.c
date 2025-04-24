@@ -6,35 +6,69 @@
 /*   By: alisharu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 13:52:09 by alisharu          #+#    #+#             */
-/*   Updated: 2025/04/23 00:46:46 by alisharu         ###   ########.fr       */
+/*   Updated: 2025/04/24 20:25:41 by alisharu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mlx.h"
 #include "so_long.h"
 
+void	put_img_mandatory(t_map *map, void *mlx, void *win, int x, int y, t_images *img, t_tank_images *tank)
+{
+	if (map->map[y][x] == '1')
+		mlx_put_image_to_window(mlx, win, img->wall, x * 64, y * 64);
+	else if (map->map[y][x] == '0')
+		mlx_put_image_to_window(mlx, win, img->background, x * 64, y * 64);
+	else if (map->map[y][x] == 'P')
+		mlx_put_image_to_window(mlx, win, tank->tank_1, x * 64, y * 64);
+	else if (map->map[y][x] == 'E')
+		mlx_put_image_to_window(mlx, win, img->gerb, x * 64, y * 64);
+	else if (map->map[y][x] == 'C')
+		mlx_put_image_to_window(mlx, win, img->coin_star, x * 64, y * 64);
+}
+
+void	put_img_bonus(t_map *map, void *mlx, void *win, int x, int y, t_images *img)
+{
+	if (map->map[y][x] == 'W')
+		mlx_put_image_to_window(mlx, win, img->wather_1, x * 64, y * 64);
+	else if (map->map[y][x] == 'M')
+		mlx_put_image_to_window(mlx, win, img->metal, x * 64, y * 64);
+	else if (map->map[y][x] == 'B')
+		mlx_put_image_to_window(mlx, win, img->coin_bomb, x * 64, y * 64);
+	else if (map->map[y][x] == 'L')
+		mlx_put_image_to_window(mlx, win, img->coin_lapata, x * 64, y * 64);
+	else if (map->map[y][x] == 'Z')
+		mlx_put_image_to_window(mlx, win, img->coin_star, x * 64, y * 64);
+	else if (map->map[y][x] == 'K')
+		mlx_put_image_to_window(mlx, win, img->coin_kaska, x * 64, y * 64);
+	else if (map->map[y][x] == 'T')
+		mlx_put_image_to_window(mlx, win, img->coin_time, x * 64, y * 64);
+	else if (map->map[y][x] == 'J')
+		mlx_put_image_to_window(mlx, win, img->coin_time, x * 64, y * 64);
+	else if (map->map[y][x] == 'G')
+		mlx_put_image_to_window(mlx, win, img->grass, x * 64, y * 64);
+}
+
 void	render_map(t_map *map)
 {
-	void	*mlx;
-	void	*win;
-	void	*wall_img;
-	void	*tank_img;
-	int		img_width;
-	int		img_height;
-	int		x;
-	int		y;
+	t_images		*img;
+	t_tank_images	*tank;
+	void			*mlx;
+	void			*win;
+	int				x;
+	int				y;
 
 	mlx = mlx_init();
 	win = mlx_new_window(mlx, map->width * 64, map->height * 64, "so_long");
-
+	put_images(img, mlx);
 	y = 0;
 	while (y < map->height)
 	{
 		x = 0;
 		while (x < map->width)
 		{
-			if (map->map[y][x] == 'P')
-				mlx_put_image_to_window(mlx, win, tank_img, x * 64, y * 64);
+			put_img_mandatory(map, mlx, win, x, y, img, tank);
+			put_img_bonus(map, mlx, win, x, y, img);
 			x++;
 		}
 		y++;
@@ -92,4 +126,3 @@ char	**read_in_map_file(int fd)
 	map[height] = NULL;
 	return (map);
 }
-

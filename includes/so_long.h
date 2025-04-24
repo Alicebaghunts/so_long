@@ -6,7 +6,7 @@
 /*   By: alisharu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 12:25:53 by alisharu          #+#    #+#             */
-/*   Updated: 2025/04/24 20:29:58 by alisharu         ###   ########.fr       */
+/*   Updated: 2025/04/24 23:07:12 by alisharu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ typedef struct s_images
 	void	*metal;
 	void	*grass;
 	void	*pulya;
-	void	*wather_1;
-	void	*wather_2;
-	void	*wather_3;
+	void	*water_1;
+	void	*water_2;
+	void	*water_3;
 	void	*coin_star;
 	void	*coin_time;
 	void	*coin_tank;
@@ -104,6 +104,18 @@ typedef struct s_enemy_images
 	void	*enemy_up_2;
 }	t_enemy_images;
 
+typedef struct s_put_images
+{
+	int				x;
+	int				y;
+	void			*mlx;
+	void			*win;
+	t_map			*map;
+	t_images		*images;
+	t_tank_images	*tank;
+	t_enemy_images	*enemy;
+}	t_put_images;
+
 int		is_rectangular(t_map *matrix);
 int		check_and_open_map_file(char *path);
 int		checking_argument(char *str);
@@ -144,13 +156,13 @@ void	put_images_renesince(t_images *images, void *mlx);
 void	put_images_water(t_images *images, void *mlx);
 void	put_images_kill(t_images *images, void *mlx);
 void	put_characters(t_images *images, void *mlx);
-void	put_wall(t_map *map, t_images *images, void *mlx, void *win);
 void	error_handling_map(t_map *map, int fd);
-void	put_images(t_map *map, void *mlx, void *win, t_images *img, t_tank_images *tank);
-void	put_images_enemy(t_enemy_images * enemy, void *mlx);
-void	put_images_tank(t_tank_images* tank, void *mlx);
-void	put_img_bonus(t_map *map, void *mlx, void *win, int x, int y, t_images *img);
-void	put_img_mandatory(t_map *map, void *mlx, void *win, int x, int y, t_images *img, t_tank_images *tank);
+void	put_images_enemy(t_enemy_images *enemy, void *mlx);
+void	put_images_tank(t_tank_images *tank, void *mlx);
+void	put_images(t_put_images *put_data);
+void	put_img_mandatory(t_put_images *put_data);
+void	put_img_bonus(t_put_images *put_data);
+void	putting(t_put_images *put_data);
 //
 #endif
 

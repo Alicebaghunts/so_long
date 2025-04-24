@@ -6,7 +6,7 @@
 /*   By: alisharu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 15:29:01 by alisharu          #+#    #+#             */
-/*   Updated: 2025/04/24 19:45:15 by alisharu         ###   ########.fr       */
+/*   Updated: 2025/04/24 23:11:40 by alisharu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,11 +108,11 @@ void	put_images_water(t_images *images, void *mlx)
 	int	w;
 	int	h;
 
-	images->wather_1 = mlx_xpm_file_to_image(mlx,
+	images->water_1 = mlx_xpm_file_to_image(mlx,
 			"textures/wather_1.xpm", &w, &h);
-	images->wather_2 = mlx_xpm_file_to_image(mlx,
+	images->water_2 = mlx_xpm_file_to_image(mlx,
 			"textures/wather_2.xpm", &w, &h);
-	images->wather_3 = mlx_xpm_file_to_image(mlx,
+	images->water_3 = mlx_xpm_file_to_image(mlx,
 			"textures/wather_3.xpm", &w, &h);
 }
 

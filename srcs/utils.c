@@ -6,13 +6,36 @@
 /*   By: alisharu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 13:50:30 by alisharu          #+#    #+#             */
-/*   Updated: 2025/04/24 19:43:53 by alisharu         ###   ########.fr       */
+/*   Updated: 2025/04/24 22:32:38 by alisharu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mlx.h"
 #include "so_long.h"
-#include <stdio.h>
+
+void	error_handling_map(t_map *map, int fd)
+{
+	close(fd);
+	ft_free_matrix(map->map);
+	free(map);
+	error_handling(INVALID_MAP);
+}
+
+void	error_handling(int num)
+{
+	if (num == 1)
+		ft_putstr_fd("❌ \033[31mError: Invalid argument\e[0m\n", 2);
+	else if (num == 2)
+		ft_putstr_fd("❌ \033[31mError: Invalid path\e[0m\n", 2);
+	else if (num == 3)
+		ft_putstr_fd("❌ \033[31mError: Failed to open file\e[0m\n", 2);
+	else if (num == 4)
+		ft_putstr_fd("❌ \033[31mError: Invalid map\e[0m\n", 2);
+	else if (num == 5)
+		ft_putstr_fd("❌ \033[31mError: Failed to malloc\e[0m\n", 2);
+
+	exit(num);
+}
 
 int	find_height(t_map *map)
 {

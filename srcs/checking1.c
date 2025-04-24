@@ -6,7 +6,7 @@
 /*   By: alisharu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 12:45:02 by alisharu          #+#    #+#             */
-/*   Updated: 2025/04/24 19:42:43 by alisharu         ###   ########.fr       */
+/*   Updated: 2025/04/24 23:03:14 by alisharu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,11 @@ int	checking_all_characters(t_map *map)
 			if (map->map[i][j] != '0' && map->map[i][j] != '1'
 				&& map->map[i][j] != 'C' && map->map[i][j] != 'E'
 				&& map->map[i][j] != 'P' && map->map[i][j] != 'A'
-				&& map->map[i][j] != 'W')
+				&& map->map[i][j] != 'W' && map->map[i][j] != 'M'
+				&& map->map[i][j] != 'B' && map->map[i][j] != 'L'
+				&& map->map[i][j] != 'Z' && map->map[i][j] != 'K'
+				&& map->map[i][j] != 'T' && map->map[i][j] != 'J'
+				&& map->map[i][j] != 'G')
 				return (0);
 			j++;
 		}

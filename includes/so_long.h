@@ -88,6 +88,10 @@ typedef struct s_tank_images
 	void	*tank_down_2;
 	void	*tank_up_1;
 	void	*tank_up_2;
+}	t_tank_images;
+
+typedef struct s_enemy_images
+{
 	void	*enemy_1;
 	void	*enemy_2;
 	void	*enemy_left_1;
@@ -98,7 +102,7 @@ typedef struct s_tank_images
 	void	*enemy_down_2;
 	void	*enemy_up_1;
 	void	*enemy_up_2;
-}	t_tank_images;
+}	t_enemy_images;
 
 int		is_rectangular(t_map *matrix);
 int		check_and_open_map_file(char *path);
@@ -127,6 +131,7 @@ void	find_player_position(t_game *game);
 void	print_map(char **map, int height);
 void	render_map(t_map *map);
 //
+void	checking(t_map *map, int fd);
 int		checking_valid_way_to_exit(t_map *map);
 int		checking_valid_way_to_coin(t_map *map);
 int		check_valid_path_to_coins(t_map *map);
@@ -140,8 +145,12 @@ void	put_images_water(t_images *images, void *mlx);
 void	put_images_kill(t_images *images, void *mlx);
 void	put_characters(t_images *images, void *mlx);
 void	put_wall(t_map *map, t_images *images, void *mlx, void *win);
-void	put_images(t_images *images, void *mlx);
 void	error_handling_map(t_map *map, int fd);
+void	put_images(t_map *map, void *mlx, void *win, t_images *img, t_tank_images *tank);
+void	put_images_enemy(t_enemy_images * enemy, void *mlx);
+void	put_images_tank(t_tank_images* tank, void *mlx);
+void	put_img_bonus(t_map *map, void *mlx, void *win, int x, int y, t_images *img);
+void	put_img_mandatory(t_map *map, void *mlx, void *win, int x, int y, t_images *img, t_tank_images *tank);
 //
 #endif
 

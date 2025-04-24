@@ -51,29 +51,27 @@ void	put_img_bonus(t_map *map, void *mlx, void *win, int x, int y, t_images *img
 
 void	render_map(t_map *map)
 {
-	t_images		*img;
+	void		*mlx;
+	void		*win;
+	t_images	*img;
 	t_tank_images	*tank;
-	void			*mlx;
-	void			*win;
-	int				x;
-	int				y;
 
+	img = (t_images *)malloc(sizeof(t_images));
+	if (!img)
+		error_handling(MALLOC_ERROR);
+	tank = (t_tank_images *)malloc(sizeof(t_tank_images));
+	if (!tank)
+		error_handling(MALLOC_ERROR);
 	mlx = mlx_init();
+	if (!mlx)
+		error_handling(MALLOC_ERROR);
 	win = mlx_new_window(mlx, map->width * 64, map->height * 64, "so_long");
-	put_images(img, mlx);
-	y = 0;
-	while (y < map->height)
-	{
-		x = 0;
-		while (x < map->width)
-		{
-			put_img_mandatory(map, mlx, win, x, y, img, tank);
-			put_img_bonus(map, mlx, win, x, y, img);
-			x++;
-		}
-		y++;
-	}
+	if (!win)
+		error_handling(MALLOC_ERROR);
+	put_images(map, mlx, win, img, tank);
 	mlx_loop(mlx);
+	free(img);
+	free(tank);
 }
 
 char	**resize_map(char **map, int *map_size)

@@ -12,8 +12,6 @@
 
 #include "mlx.h"
 #include "so_long.h"
-#include "mlx.h"
-#include "so_long.h"
 
 void	error_handling_map(t_map *map, int fd)
 {
@@ -39,21 +37,45 @@ void	error_handling(int num)
 	exit(num);
 }
 
-void	put_images(t_images *images, void *mlx)
+void	putting(t_map *map, void *mlx, void *win, t_images *img, t_tank_images *tank)
 {
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < map->height)
+	{
+		x = 0;
+		while (x < map->width)
+		{
+			put_img_mandatory(map, mlx, win, x, y, img, tank);
+			put_img_bonus(map, mlx, win, x, y, img);
+			x++;
+		}
+		y++;
+	}
+}
+
+void	put_images(t_map *map, void *mlx, void *win, t_images *images, t_tank_images *tank)
+{
+	t_enemy_images	*enemy;
+
+	enemy = (t_enemy_images *)malloc(sizeof(t_enemy_images));
+	if (!images || !tank || !enemy)
+    	error_handling(MALLOC_ERROR);
 	put_characters(images, mlx);
 	put_images_kill(images, mlx);
 	put_images_coin(images, mlx);
-	//put_images_tank(images, mlx);
-	//put_images_enemy(images, mlx);
+	put_images_tank(tank, mlx);
+	put_images_enemy(enemy, mlx);
 	put_images_water(images, mlx);
-	put_images_renesnace(images, mlx);
+	put_images_renesince(images, mlx);
+	putting(map, mlx, win, images, tank);
 }
 
 int	main(int argc, char **argv)
 {
-	t_map	*map;
-	t_images *img;
+	t_map		*map;
 	
 	int		fd;
 	char	**map_array;

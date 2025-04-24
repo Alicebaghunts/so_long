@@ -6,7 +6,7 @@
 /*   By: alisharu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 12:45:02 by alisharu          #+#    #+#             */
-/*   Updated: 2025/04/22 15:25:04 by alisharu         ###   ########.fr       */
+/*   Updated: 2025/04/22 21:01:19 by alisharu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,32 @@ int	checking_coins(t_map *map)
 		i++;
 	}
 	if (map->coin < 2)
+		return (0);
+	return (1);
+}
+
+int	checking_position(t_map *map)
+{
+	int	i;
+	int	j;
+	int	pos;
+
+	pos = 0;
+	if (!map || !map->map || !map->map[0])
+		return (0);
+	i = 0;
+	while (i < map->height)
+	{
+		j = 0;
+		while (j < map->width)
+		{
+			if (map->map[i][j] == 'P')
+				pos++;
+			j++;
+		}
+		i++;
+	}
+	if (pos != 1)
 		return (0);
 	return (1);
 }

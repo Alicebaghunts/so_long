@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alisharu <marvin@42.fr>                    #+#  +:+       +#+        */
+/*   By: alisharu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-04-19 13:50:30 by alisharu          #+#    #+#             */
-/*   Updated: 2025-04-19 13:50:30 by alisharu         ###   ########.fr       */
+/*   Created: 2025/04/19 13:50:30 by alisharu          #+#    #+#             */
+/*   Updated: 2025/04/23 18:54:48 by alisharu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,23 +31,6 @@ int	find_width(t_map *map)
 	if (map == NULL || map->map == NULL || map->map[0] == NULL)
 		return (0);
 	return (ft_strlen(map->map[0]));
-}
-
-void	print_matrix(char **matrix)
-{
-	int	i;
-
-	i = 0;
-	if (matrix == NULL)
-	{
-		printf("Matrix is NULL\n");
-		return ;
-	}
-	while (matrix[i] != NULL)
-	{
-		printf("%s\n", matrix[i]);
-		i++;
-	}
 }
 
 void	ft_free_matrix(char **arr)

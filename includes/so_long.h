@@ -6,7 +6,7 @@
 /*   By: alisharu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 12:25:53 by alisharu          #+#    #+#             */
-/*   Updated: 2025/04/22 15:13:08 by alisharu         ###   ########.fr       */
+/*   Updated: 2025/04/23 00:27:23 by alisharu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,63 @@ typedef struct s_game
 	int			is_running;
 }	t_game;
 
+typedef struct s_images
+{
+	void	*background;
+	void	*ice;
+	void	*wall;
+	void	*gerb;
+	void	*metal;
+	void	*grass;
+	void	*pulya;
+	void	*wather_1;
+	void	*wather_2;
+	void	*wather_3;
+	void	*coin_star;
+	void	*coin_time;
+	void	*coin_tank;
+	void	*coin_kaska;
+	void	*coin_grandat;
+	void	*coin_lapata;
+	void	*renesnace_1;
+	void	*renesnace_2;
+	void	*renesnace_3;
+	void	*renesnace_4;
+	void	*bom_1;
+	void	*bom_2;
+	void	*bom_3;
+	void	*bom_4;
+	void	*bom_5;
+	void	*bom_6;
+	void	*bom_7;
+	void	*bom_8;
+	void	*bom_9;
+}	t_images;
+
+typedef struct s_tank_images
+{
+	void	*tank_1;
+	void	*tank_2;
+	void	*tank_left_1;
+	void	*tank_left_2;
+	void	*tank_right_1;
+	void	*tank_right_2;
+	void	*tank_down_1;
+	void	*tank_down_2;
+	void	*tank_up_1;
+	void	*tank_up_2;
+	void	*enemy_1;
+	void	*enemy_2;
+	void	*enemy_left_1;
+	void	*enemy_left_2;
+	void	*enemy_right_1;
+	void	*enemy_right_2;
+	void	*enemy_down_1;
+	void	*enemy_down_2;
+	void	*enemy_up_1;
+	void	*enemy_up_2;
+}	t_tank_images;
+
 int		is_rectangular(t_map *matrix);
 int		check_and_open_map_file(char *path);
 int		checking_argument(char *str);
@@ -63,6 +120,7 @@ int		find_width(t_map *map);
 int		checking_walls(t_map *map);
 int		checking_exits(t_map *map);
 int		checking_coins(t_map *map);
+int		checking_position(t_map *map);
 int		checking_all_characters(t_map *map);
 //
 void	fill_exit(char **map, int x, int y);

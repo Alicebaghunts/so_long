@@ -6,7 +6,7 @@
 /*   By: alisharu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 15:19:34 by alisharu          #+#    #+#             */
-/*   Updated: 2025/04/24 22:32:24 by alisharu         ###   ########.fr       */
+/*   Updated: 2025/04/26 15:47:03 by alisharu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int	main(int argc, char **argv)
 {
-	t_map		*map;
+	t_map	*map;
 	int		fd;
 	char	**map_array;
 

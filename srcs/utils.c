@@ -6,20 +6,12 @@
 /*   By: alisharu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 13:50:30 by alisharu          #+#    #+#             */
-/*   Updated: 2025/04/24 22:32:38 by alisharu         ###   ########.fr       */
+/*   Updated: 2025/04/26 15:46:34 by alisharu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mlx.h"
 #include "so_long.h"
-
-void	error_handling_map(t_map *map, int fd)
-{
-	close(fd);
-	ft_free_matrix(map->map);
-	free(map);
-	error_handling(INVALID_MAP);
-}
 
 void	error_handling(int num)
 {
@@ -35,6 +27,14 @@ void	error_handling(int num)
 		ft_putstr_fd("❌ \033[31mError: Failed to malloc\e[0m\n", 2);
 
 	exit(num);
+}
+
+void	error_handling_map(t_map *map, int fd)
+{
+	close(fd);
+	ft_free_matrix(map->map);
+	free(map);
+	error_handling(INVALID_MAP);
 }
 
 int	find_height(t_map *map)

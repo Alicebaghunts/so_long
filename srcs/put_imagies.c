@@ -6,7 +6,7 @@
 /*   By: alisharu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 19:05:10 by alisharu          #+#    #+#             */
-/*   Updated: 2025/04/24 23:12:12 by alisharu         ###   ########.fr       */
+/*   Updated: 2025/04/26 15:44:24 by alisharu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,9 @@ void	put_img_mandatory(t_put_images *put_data)
 			put_data->images->coin_star, put_data->x * 64, put_data->y * 64);
 }
 
-void	put_img_bonus(t_put_images *put_data)
+void	put_img_bonus_1(t_put_images *put_data)
 {
-	if (put_data->map->map[put_data->y][put_data->x] == 'W')
-		mlx_put_image_to_window(put_data->mlx, put_data->win,
-			put_data->images->water_1, put_data->x * 64, put_data->y * 64);
-	else if (put_data->map->map[put_data->y][put_data->x] == 'M')
-		mlx_put_image_to_window(put_data->mlx, put_data->win,
-			put_data->images->metal, put_data->x * 64, put_data->y * 64);
-	else if (put_data->map->map[put_data->y][put_data->x] == 'B')
+	if (put_data->map->map[put_data->y][put_data->x] == 'B')
 		mlx_put_image_to_window(put_data->mlx, put_data->win,
 			put_data->images->coin_bomb, put_data->x * 64, put_data->y * 64);
 	else if (put_data->map->map[put_data->y][put_data->x] == 'L')
@@ -77,6 +71,19 @@ void	put_img_bonus(t_put_images *put_data)
 			put_data->images->grass, put_data->x * 64, put_data->y * 64);
 }
 
+void	put_img_bonus_2(t_put_images *put_data)
+{
+	if (put_data->map->map[put_data->y][put_data->x] == 'W')
+		mlx_put_image_to_window(put_data->mlx, put_data->win,
+			put_data->images->water_1, put_data->x * 64, put_data->y * 64);
+	else if (put_data->map->map[put_data->y][put_data->x] == 'M')
+		mlx_put_image_to_window(put_data->mlx, put_data->win,
+			put_data->images->metal, put_data->x * 64, put_data->y * 64);
+	else if (put_data->map->map[put_data->y][put_data->x] == 'G')
+		mlx_put_image_to_window(put_data->mlx, put_data->win,
+			put_data->images->grass, put_data->x * 64, put_data->y * 64);
+}
+
 void	putting(t_put_images *put_data)
 {
 	int	x;
@@ -89,7 +96,8 @@ void	putting(t_put_images *put_data)
 		while (x < put_data->map->width)
 		{
 			put_img_mandatory(put_data);
-			put_img_bonus(put_data);
+			put_img_bonus_1(put_data);
+			put_img_bonus_2(put_data);
 			x++;
 		}
 		y++;

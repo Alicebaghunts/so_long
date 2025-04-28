@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx.h"
 #include "so_long.h"
 
 int	checking_walls(t_map *map)
@@ -82,7 +81,7 @@ int	checking_coins(t_map *map)
 		}
 		i++;
 	}
-	if (map->coin < 2)
+	if (map->coin < 1)
 		return (0);
 	return (1);
 }

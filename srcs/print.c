@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "so_long.h"
-#include "mlx.h"
 
 void	print_map(char **map, int height)
 {

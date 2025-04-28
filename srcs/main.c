@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx.h"
 #include "so_long.h"
 
 int	main(int argc, char **argv)
@@ -35,7 +34,5 @@ int	main(int argc, char **argv)
 	render_map(map);
 
 	close(fd);
-	ft_free_matrix(map->map);
-	free(map);
 	return (0);
 }

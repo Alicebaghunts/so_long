@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "so_long.h"
-#include "mlx.h"
 
 void	put_images_enemy(t_enemy_images *enemy, void *mlx)
 {

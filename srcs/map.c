@@ -10,56 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx.h"
 #include "so_long.h"
-
-void	*malloc_img(t_map *map)
-{
-	t_images	*img;
-
-	img = (t_images *)malloc(sizeof(t_images));
-	if (!img)
-	{
-		ft_free_matrix(map->map);
-		free(map);
-		perror("Memory allocation failed for images");
-		error_handling(MALLOC_ERROR);
-	}
-	return (img);
-}
-
-t_enemy_images	*malloc_enemy(t_map *map, t_images *img)
-{
-	t_enemy_images	*enemy;
-
-	enemy = (t_enemy_images *)malloc(sizeof(t_enemy_images));
-	if (!enemy)
-	{
-		perror("Memory allocation failed for enemy images");
-		free(img);
-		ft_free_matrix(map->map);
-		free(map);
-		error_handling(MALLOC_ERROR);
-	}
-	return (enemy);
-}
-
-t_tank_images	*malloc_tank(t_map *map, t_images *img, t_enemy_images *enemy)
-{
-	t_tank_images	*tank;
-
-	tank = (t_tank_images *)malloc(sizeof(t_tank_images));
-	if (!tank)
-	{
-		perror("Memory allocation failed for tank images");
-		free(img);
-		free(enemy);
-		ft_free_matrix(map->map);
-		free(map);
-		error_handling(MALLOC_ERROR);
-	}
-	return (tank);
-}
 
 void	free_all(t_map *map, t_images *img, t_enemy_images *enemy,
 		t_tank_images *tank)
@@ -73,46 +24,38 @@ void	free_all(t_map *map, t_images *img, t_enemy_images *enemy,
 
 void	render_map(t_map *map)
 {
-	void			*mlx;
-	void			*win;
-	t_images		*img;
-	t_tank_images	*tank;
-	t_enemy_images	*enemy;
-	t_put_images	put_data;
+	t_put_images	*put_data;
 
-	img = malloc_img(map);
-	enemy = malloc_enemy(map, img);
-	tank = malloc_tank(map, img, enemy);
-	mlx = mlx_init();
-	if (!mlx)
+	put_data = malloc(sizeof(t_put_images));
+	put_data->images = malloc_img(put_data->map);
+	put_data->enemy = malloc_enemy(put_data->map, put_data->images);
+	put_data->tank = malloc_tank(put_data->map, put_data->images, put_data->enemy);
+	put_data->mlx = mlx_init();
+	if (!put_data->mlx)
 	{
 		perror("Failed to initialize mlx");
-		free_all(map, img, enemy, tank);
+		// free_all(map, img, enemy, tank);
 		error_handling(MALLOC_ERROR);
 	}
-	win = mlx_new_window(mlx, map->width * 64, map->height * 64, "so_long");
-	if (!win)
+	put_data->win = mlx_new_window(put_data->mlx, map->width * 64, map->height * 64, "so_long");
+	if (!put_data->win)
 	{
 		perror("Failed to create window");
-		free_all(map, img, enemy, tank);
-		mlx_destroy_display(mlx);
-		free(mlx);
+		// free_all(map, img, enemy, tank);
+		mlx_destroy_display(put_data->mlx);
+		free(put_data->mlx);
 		error_handling(MALLOC_ERROR);
 	}
-	put_data.mlx = mlx;
-	put_data.win = win;
-	put_data.map = map;
-	put_data.images = img;
-	put_data.tank = tank;
-	put_data.enemy = enemy;
-	put_images(&put_data);
-	mlx_loop(mlx);
-	free_all(map, img, enemy, tank);
-	if (win)
-		mlx_destroy_window(mlx, win);
-	if (mlx)
-		mlx_destroy_display(mlx);
-	free(mlx);
+	put_data->map = map;
+	put_images(put_data);
+	mlx_loop(put_data->mlx);
+	// free_all(map, img, enemy, tank);
+	// free_all_data();
+	// if (win)
+	// 	mlx_destroy_window(mlx, win);
+	// if (mlx)
+	// 	mlx_destroy_display(mlx);
+	// free(mlx);
 }
 
 char	**resize_map(char **map, int *map_size)

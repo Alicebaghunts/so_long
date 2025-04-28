@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "so_long.h"
-#include "mlx.h"
 
 void	put_images(t_put_images *put_data)
 {
@@ -86,20 +85,17 @@ void	put_img_bonus_2(t_put_images *put_data)
 
 void	putting(t_put_images *put_data)
 {
-	int	x;
-	int	y;
-
-	y = 0;
-	while (y < put_data->map->height)
+	put_data->y = 0;
+	while (put_data->y < put_data->map->height)
 	{
-		x = 0;
-		while (x < put_data->map->width)
+		put_data->x = 0;
+		while (put_data->x < put_data->map->width)
 		{
 			put_img_mandatory(put_data);
 			put_img_bonus_1(put_data);
 			put_img_bonus_2(put_data);
-			x++;
+			put_data->x++;
 		}
-		y++;
+		put_data->y++;
 	}
 }

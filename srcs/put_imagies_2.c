@@ -11,8 +11,6 @@
 /* ************************************************************************** */
 
 #include "so_long.h"
-#include "mlx.h"
-
 
 void	put_images_renesince(t_images *images, void *mlx)
 {
@@ -60,7 +58,7 @@ void	put_characters(t_images *images, void *mlx)
 	images->ice = mlx_xpm_file_to_image(mlx, "textures/ice.xpm", &w, &h);
 	images->wall = mlx_xpm_file_to_image(mlx, "textures/wall.xpm", &w, &h);
 	images->metal = mlx_xpm_file_to_image(mlx, "textures/metal.xpm", &w, &h);
-	images->grass = mlx_xpm_file_to_image(mlx, "textures/tress.xpm", &w, &h);
+	images->grass = mlx_xpm_file_to_image(mlx, "textures/grass.xpm", &w, &h);
 	images->pulya = mlx_xpm_file_to_image(mlx, "textures/pulya.xpm", &w, &h);
 	images->gerb = mlx_xpm_file_to_image(mlx, "textures/gerb.xpm", &w, &h);
 	images->background = mlx_xpm_file_to_image(mlx,

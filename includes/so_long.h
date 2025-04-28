@@ -17,6 +17,7 @@
 # include <sys/wait.h>
 # include <fcntl.h>
 # include "../libft/libft.h"
+# include "mlx.h"
 
 # define INVALID_ARGUMENT 1
 # define INVALID_PATH 2
@@ -44,7 +45,7 @@ typedef struct s_player
 typedef struct s_game
 {
 	t_player	player;
-	t_map		map;
+	t_map		*map;
 	int			is_running;
 }	t_game;
 
@@ -110,10 +111,13 @@ typedef struct s_put_images
 	int				y;
 	void			*mlx;
 	void			*win;
-	t_map			*map;
+	t_map			*map; //change to t_game
 	t_images		*images;
 	t_tank_images	*tank;
 	t_enemy_images	*enemy;
+	int				enemy_flag;
+	int 			tank_flag;
+	int				caracters_flag;
 }	t_put_images;
 
 int		is_rectangular(t_map *matrix);
@@ -164,6 +168,12 @@ void	put_img_mandatory(t_put_images *put_data);
 void	put_img_bonus(t_put_images *put_data);
 void	putting(t_put_images *put_data);
 //
+
+void	*malloc_img(t_map *map);
+t_enemy_images	*malloc_enemy(t_map *map, t_images *img);
+t_tank_images	*malloc_tank(t_map *map, t_images *img, t_enemy_images *enemy);
+
+
 #endif
 
 

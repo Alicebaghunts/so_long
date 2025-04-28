@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx.h"
 #include "so_long.h"
 
 void	checking(t_map *map, int fd)
@@ -27,10 +26,10 @@ void	checking(t_map *map, int fd)
 		error_handling_map(map, fd);
 	if (checking_all_characters(map) == 0)
 		error_handling_map(map, fd);
-	if (checking_valid_way_to_exit(map) == 0)
-		error_handling_map(map, fd);
-	if (checking_valid_way_to_coin(map) == 0)
-		error_handling_map(map, fd);
+	// if (checking_valid_way_to_exit(map) == 0)
+	// 	error_handling_map(map, fd);
+	// if (checking_valid_way_to_coin(map) == 0)
+	// 	error_handling_map(map, fd);
 }
 
 int	is_rectangular(t_map *matrix)

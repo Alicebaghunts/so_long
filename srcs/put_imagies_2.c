@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   put_imagies_2.c                                    :+:      :+:    :+:   */
+/*   init_imagies_2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alisharu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,57 +10,45 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../includes/so_long.h"
 
-void	put_images_renesince(t_images *images, void *mlx)
+void	init_images_renesince(t_map_images *images, void *mlx)
 {
-	int	w;
-	int	h;
-
 	images->renesnace_1 = mlx_xpm_file_to_image(mlx,
-			"textures/ren_1.xpm", &w, &h);
+			"textures/ren_1.xpm", &images->x, &images->y);
 	images->renesnace_2 = mlx_xpm_file_to_image(mlx,
-			"textures/ren_2.xpm", &w, &h);
+			"textures/ren_2.xpm", &images->x, &images->y);
 	images->renesnace_3 = mlx_xpm_file_to_image(mlx,
-			"textures/ren_3.xpm", &w, &h);
+			"textures/ren_3.xpm", &images->x, &images->y);
 	images->renesnace_4 = mlx_xpm_file_to_image(mlx,
-			"textures/ren_4.xpm", &w, &h);
+			"textures/ren_4.xpm", &images->x, &images->y);
 }
 
-void	put_images_water(t_images *images, void *mlx)
+void	init_images_water(t_map_images *images, void *mlx)
 {
-	int	w;
-	int	h;
-
 	images->water_1 = mlx_xpm_file_to_image(mlx,
-			"textures/water_1.xpm", &w, &h);
+			"textures/water_1.xpm", &images->x, &images->y);
 	images->water_2 = mlx_xpm_file_to_image(mlx,
-			"textures/water_2.xpm", &w, &h);
+			"textures/water_2.xpm", &images->x, &images->y);
 	images->water_3 = mlx_xpm_file_to_image(mlx,
-			"textures/water_3.xpm", &w, &h);
+			"textures/water_3.xpm", &images->x, &images->y);
 }
 
-void	put_images_kill(t_images *images, void *mlx)
+void	init_images_kill(t_map_images *images, void *mlx)
 {
-	int	w;
-	int	h;
-
-	images->bom_1 = mlx_xpm_file_to_image(mlx, "textures/bom_1.xpm", &w, &h);
-	images->bom_2 = mlx_xpm_file_to_image(mlx, "textures/bom_2.xpm", &w, &h);
-	images->bom_3 = mlx_xpm_file_to_image(mlx, "textures/bom_3.xpm", &w, &h);
+	images->bom_1 = mlx_xpm_file_to_image(mlx, "textures/bom_1.xpm", &images->x, &images->y);
+	images->bom_2 = mlx_xpm_file_to_image(mlx, "textures/bom_2.xpm", &images->x, &images->y);
+	images->bom_3 = mlx_xpm_file_to_image(mlx, "textures/bom_3.xpm", &images->x, &images->y);
 }
 
-void	put_characters(t_images *images, void *mlx)
+void	init_characters(t_map_images *images, void *mlx)
 {
-	int	w;
-	int	h;
-
-	images->ice = mlx_xpm_file_to_image(mlx, "textures/ice.xpm", &w, &h);
-	images->wall = mlx_xpm_file_to_image(mlx, "textures/wall.xpm", &w, &h);
-	images->metal = mlx_xpm_file_to_image(mlx, "textures/metal.xpm", &w, &h);
-	images->grass = mlx_xpm_file_to_image(mlx, "textures/grass.xpm", &w, &h);
-	images->pulya = mlx_xpm_file_to_image(mlx, "textures/pulya.xpm", &w, &h);
-	images->gerb = mlx_xpm_file_to_image(mlx, "textures/gerb.xpm", &w, &h);
+	images->ice = mlx_xpm_file_to_image(mlx, "textures/ice.xpm", &images->x, &images->y);
+	images->wall = mlx_xpm_file_to_image(mlx, "textures/wall.xpm", &images->x, &images->y);
+	images->metal = mlx_xpm_file_to_image(mlx, "textures/metal.xpm", &images->x, &images->y);
+	images->grass = mlx_xpm_file_to_image(mlx, "textures/grass.xpm", &images->x, &images->y);
+	images->pulya = mlx_xpm_file_to_image(mlx, "textures/pulya.xpm", &images->x, &images->y);
+	images->gerb = mlx_xpm_file_to_image(mlx, "textures/gerb.xpm", &images->x, &images->y);
 	images->background = mlx_xpm_file_to_image(mlx,
-			"textures/background.xpm", &w, &h);
+			"textures/background.xpm", &images->x, &images->y);
 }

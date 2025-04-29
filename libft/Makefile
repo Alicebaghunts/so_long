@@ -25,7 +25,7 @@ CC = cc
 
 RM = rm -f
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g3
 
 RESET			= \033[0m
 BLUE			= \033[34m

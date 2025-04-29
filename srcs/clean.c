@@ -9,9 +9,10 @@
 /*   Updated: 2025-04-28 13:05:44 by alisharu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "so_long.h"
 
-void	free_enemy_img(t_put_images *data)
+#include "../includes/so_long.h"
+
+void	free_enemy_img(t_game *data)
 {
 	if (data->enemy->enemy_1)
 		mlx_destroy_image(data->mlx, data->enemy->enemy_1);
@@ -35,32 +36,32 @@ void	free_enemy_img(t_put_images *data)
 		mlx_destroy_image(data->mlx, data->enemy->enemy_right_2);
 }
 
-void	free_tank_img(t_put_images *data)
+void	free_tank_img(t_game *data)
 {
-	if (data->tank->tank_1)
-		mlx_destroy_image(data->mlx, data->tank->tank_1);
-	if (data->tank->tank_2)
-		mlx_destroy_image(data->mlx, data->tank->tank_2);
-	if (data->tank->tank_up_1)
-		mlx_destroy_image(data->mlx, data->tank->tank_up_1);
-	if (data->tank->tank_up_2)
-		mlx_destroy_image(data->mlx, data->tank->tank_up_2);
-	if (data->tank->tank_down_1)
-		mlx_destroy_image(data->mlx, data->tank->tank_down_1);
-	if (data->tank->tank_down_2)
-		mlx_destroy_image(data->mlx, data->tank->tank_down_2);
-	if (data->tank->tank_left_1)
-		mlx_destroy_image(data->mlx, data->tank->tank_left_1);
-	if (data->tank->tank_left_2)
-		mlx_destroy_image(data->mlx, data->tank->tank_left_2);
-	if (data->tank->tank_right_1)
-		mlx_destroy_image(data->mlx, data->tank->tank_right_1);
-	if (data->tank->tank_right_2)
-		mlx_destroy_image(data->mlx, data->tank->tank_right_2);
+	if (data->player->tank_1)
+		mlx_destroy_image(data->mlx, data->player->tank_1);
+	if (data->player->tank_2)
+		mlx_destroy_image(data->mlx, data->player->tank_2);
+	if (data->player->tank_up_1)
+		mlx_destroy_image(data->mlx, data->player->tank_up_1);
+	if (data->player->tank_up_2)
+		mlx_destroy_image(data->mlx, data->player->tank_up_2);
+	if (data->player->tank_down_1)
+		mlx_destroy_image(data->mlx, data->player->tank_down_1);
+	if (data->player->tank_down_2)
+		mlx_destroy_image(data->mlx, data->player->tank_down_2);
+	if (data->player->tank_left_1)
+		mlx_destroy_image(data->mlx, data->player->tank_left_1);
+	if (data->player->tank_left_2)
+		mlx_destroy_image(data->mlx, data->player->tank_left_2);
+	if (data->player->tank_right_1)
+		mlx_destroy_image(data->mlx, data->player->tank_right_1);
+	if (data->player->tank_right_2)
+		mlx_destroy_image(data->mlx, data->player->tank_right_2);
 }
 
 
-void	free_coin_img(t_put_images *data)
+void	free_coin_img(t_game *data)
 {
 	if (data->images->coin_star)
 		mlx_destroy_image(data->mlx, data->images->coin_star);
@@ -78,7 +79,7 @@ void	free_coin_img(t_put_images *data)
 		mlx_destroy_image(data->mlx, data->images->coin_bomb);
 }
 
-void	free_characters_1(t_put_images *data)
+void	free_characters_1(t_game *data)
 {
 	if (data->images->background)
 		mlx_destroy_image(data->mlx, data->images->background);
@@ -103,7 +104,7 @@ void	free_characters_1(t_put_images *data)
 }
 
 
-void	free_characters_2(t_put_images *data)
+void	free_characters_2(t_game *data)
 {
 	if (data->images->renesnace_1)
 		mlx_destroy_image(data->mlx, data->images->renesnace_1);
@@ -121,28 +122,23 @@ void	free_characters_2(t_put_images *data)
 		mlx_destroy_image(data->mlx, data->images->bom_3);
 }
 
-void	free_all_characters(t_put_images *data)
+void	free_all_characters(t_game *data)
 {
-	if (data->enemy_flag == 1)
 		free_enemy_img(data);
-	else if (data->tank_flag == 1)
 		free_tank_img(data);
-	else if (data->caracters_flag == 1)
-	{
 		free_coin_img(data);
 		free_characters_1(data);
 		free_characters_2(data);
-	}
 }
 
-void	free_all_data(t_put_images *data)
+void	free_all_data(t_game *data)
 {
 	if (data->mlx && data->win)
 	{
 		mlx_destroy_window(data->mlx, data->win);
 		mlx_destroy_display(data->mlx);
 	}
-	if (data->map)
-		ft_free_matrix(data->map);
+	if (data->map->map)
+		ft_free_matrix(data->map->map);
 	free(data);
 }

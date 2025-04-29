@@ -10,53 +10,93 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../includes/so_long.h"
 
-void	free_all(t_map *map, t_images *img, t_enemy_images *enemy,
-		t_tank_images *tank)
+int	close_game(t_game *data)
 {
-	free(img);
-	free(enemy);
-	free(tank);
-	free(map->map);
-	free(map);
+	free_all_data(data);
+	exit(0);
+	return (0);
 }
+
+
+static void	call_move(int keycode, t_game *data, int *count)
+{
+	(void)count;
+	printf("%d %d\n", data->player->y, data->player->x);
+	if ((keycode == UP || keycode == UP_A)
+		&& data->map->map[data->player->y - 1][data->player->x] != '1')
+	{
+	//stex grum em upi logikan pixelov vonca ashxatum
+	}
+	else if ((keycode == DOWN || keycode == DOWN_A)
+		&& data->map->map[data->player->y + 1][data->player->x] != '1')
+	{
+	//stex grum em DOWNi logikan pixelov vonca ashxatum
+
+	}
+	else if ((keycode == LEFT || keycode == LEFT_A)
+		&& data->map->map[data->player->y][data->player->x - 1] != '1')
+	{
+//LEFTI
+	}
+	else if ((keycode == RIGHT || keycode == RIGHT_A)
+		&& data->map->map[data->player->y][data->player->x + 1] != '1')
+	{
+//RIGHT
+	}
+}
+
+int	key_hook(int keycode, t_game *data)
+{
+	static int	count = 1;
+
+	if (keycode == ESC)
+		close_game(data);
+	call_move(keycode, data, &count);
+	return (0);
+}
+
 
 void	render_map(t_map *map)
 {
-	t_put_images	*put_data;
+	t_game	*data;
 
-	put_data = malloc(sizeof(t_put_images));
-	put_data->images = malloc_img(put_data->map);
-	put_data->enemy = malloc_enemy(put_data->map, put_data->images);
-	put_data->tank = malloc_tank(put_data->map, put_data->images, put_data->enemy);
-	put_data->mlx = mlx_init();
-	if (!put_data->mlx)
+	data = malloc(sizeof(t_game));
+	if (!data)
+		error_handling(MALLOC_ERROR);
+	data->map = map;
+
+	data->images = malloc_img(data->map);
+	data->enemy = malloc_enemy(data->map, data->images);
+	data->player = malloc_tank(data->map, data->images, data->enemy);
+
+	data->mlx = mlx_init();
+	if (!data->mlx)
 	{
 		perror("Failed to initialize mlx");
-		// free_all(map, img, enemy, tank);
+		free_all_characters(data);
+		free_all_data(data);
 		error_handling(MALLOC_ERROR);
 	}
-	put_data->win = mlx_new_window(put_data->mlx, map->width * 64, map->height * 64, "so_long");
-	if (!put_data->win)
+
+	data->win = mlx_new_window(data->mlx, map->width * 64, map->height * 64, "so_long");
+	if (!data->win)
 	{
 		perror("Failed to create window");
-		// free_all(map, img, enemy, tank);
-		mlx_destroy_display(put_data->mlx);
-		free(put_data->mlx);
+		free_all_characters(data);
+		free_all_data(data);
 		error_handling(MALLOC_ERROR);
 	}
-	put_data->map = map;
-	put_images(put_data);
-	mlx_loop(put_data->mlx);
-	// free_all(map, img, enemy, tank);
-	// free_all_data();
-	// if (win)
-	// 	mlx_destroy_window(mlx, win);
-	// if (mlx)
-	// 	mlx_destroy_display(mlx);
-	// free(mlx);
+
+	//put_position(data->enemy);
+	put_images(data);
+	find_player_position(data);
+	mlx_hook(data->win, 17, 0, close_game, data);
+	mlx_key_hook(data->win, &key_hook, data);
+	mlx_loop(data->mlx);
 }
+
 
 char	**resize_map(char **map, int *map_size)
 {
@@ -85,7 +125,7 @@ char	**read_in_map_file(int fd)
 	int		height;
 	int		map_size;
 
-	map = (char **)malloc(sizeof(char *) * 10);
+	map = malloc(sizeof(char *) * 10);
 	if (!map)
 		error_handling(MALLOC_ERROR);
 	map_size = 10;

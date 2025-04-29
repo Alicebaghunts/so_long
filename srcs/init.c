@@ -10,14 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../includes/so_long.h"
 
 void	init_map_first(t_map *map, int width, int height)
 {
 	if (map == NULL)
 		return ;
 	map->coin = 0;
-	map->exits = 0;
+	map->exit = 0;
 	map->height = height;
 	map->width = width;
 }

@@ -10,13 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../includes/so_long.h"
 
 void	*malloc_img(t_map *map)
 {
-	t_images	*img;
+	t_map_images	*img;
 
-	img = (t_images *)malloc(sizeof(t_images));
+	img = (t_map_images *)malloc(sizeof(t_map_images));
 	if (!img)
 	{
 		ft_free_matrix(map->map);
@@ -27,11 +27,11 @@ void	*malloc_img(t_map *map)
 	return (img);
 }
 
-t_enemy_images	*malloc_enemy(t_map *map, t_images *img)
+t_enemy	*malloc_enemy(t_map *map, t_map_images *img)
 {
-	t_enemy_images	*enemy;
+	t_enemy	*enemy;
 
-	enemy = (t_enemy_images *)malloc(sizeof(t_enemy_images));
+	enemy = (t_enemy *)malloc(sizeof(t_enemy));
 	if (!enemy)
 	{
 		perror("Memory allocation failed for enemy images");
@@ -43,11 +43,11 @@ t_enemy_images	*malloc_enemy(t_map *map, t_images *img)
 	return (enemy);
 }
 
-t_tank_images	*malloc_tank(t_map *map, t_images *img, t_enemy_images *enemy)
+t_player	*malloc_tank(t_map *map, t_map_images *img, t_enemy *enemy)
 {
-	t_tank_images	*tank;
+	t_player	*tank;
 
-	tank = (t_tank_images *)malloc(sizeof(t_tank_images));
+	tank = (t_player *)malloc(sizeof(t_player));
 	if (!tank)
 	{
 		perror("Memory allocation failed for tank images");

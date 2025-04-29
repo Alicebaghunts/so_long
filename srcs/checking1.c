@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../includes/so_long.h"
 
 int	checking_walls(t_map *map)
 {
@@ -52,12 +52,12 @@ int	checking_exits(t_map *map)
 		while (j < map->width)
 		{
 			if (map->map[i][j] == 'E')
-				map->exits++;
+				map->exit++;
 			j++;
 		}
 		i++;
 	}
-	if (map->exits != 1)
+	if (map->exit != 1)
 		return (0);
 	return (1);
 }

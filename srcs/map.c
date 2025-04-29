@@ -20,14 +20,15 @@ int	close_game(t_game *data)
 }
 
 
-static void	call_move(int keycode, t_game *data, int *count)
+void	call_move(int keycode, t_game *data)
 {
-	(void)count;
-	printf("%d %d\n", data->player->y, data->player->x);
+//	printf("%d %d\n", data->player->y, data->player->x);
 	if ((keycode == UP || keycode == UP_A)
-		&& data->map->map[data->player->y - 1][data->player->x] != '1')
+		&& data->map->map[(data->player->y-16) / 64][data->player->x] != '1')
 	{
-	//stex grum em upi logikan pixelov vonca ashxatum
+	//stex grum em upi lddaa rogikan pixelov vonca ashxatum
+	// player->y -= 16;
+	// ubdate_map new x y taza knkari;
 	}
 	else if ((keycode == DOWN || keycode == DOWN_A)
 		&& data->map->map[data->player->y + 1][data->player->x] != '1')
@@ -53,7 +54,7 @@ int	key_hook(int keycode, t_game *data)
 
 	if (keycode == ESC)
 		close_game(data);
-	call_move(keycode, data, &count);
+	call_move(keycode, data);
 	return (0);
 }
 

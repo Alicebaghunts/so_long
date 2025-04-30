@@ -25,12 +25,12 @@ void	find_player_position(t_game *game)
 		{
 			if (game->map->map[y][x] == 'P')
 			{
-				game->player->x = x;
-				game->player->y = y;
+				game->player->x = x * 64;
+				game->player->y = y * 64;
 				return ;
 			}
 			x++;
 		}
 		y++;
-	}
+	}//
 }

@@ -25,15 +25,12 @@
 # define INVALID_MAP 4
 # define MALLOC_ERROR 5
 
+#  define TILE_SIZE 64
 #  define ESC 65307
 #  define UP 119
 #  define DOWN 115
 #  define LEFT 97
 #  define RIGHT 100
-#  define UP_A 65362
-#  define DOWN_A 65364
-#  define LEFT_A 65361
-#  define RIGHT_A 65363
 typedef struct s_map_images
 {
 	void	*background;
@@ -172,6 +169,7 @@ void	put_img_bonus_1(t_game *data);
 void	put_img_bonus_2(t_game *data);
 void	error_handling_map(t_map *map, int fd);
 void	find_player_position(t_game *game);
+void call_move(int keycode, t_game *data);
 //
 
 void	*malloc_img(t_map *map);

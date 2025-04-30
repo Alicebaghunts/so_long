@@ -169,7 +169,6 @@ void	put_img_bonus_1(t_game *data);
 void	put_img_bonus_2(t_game *data);
 void	error_handling_map(t_map *map, int fd);
 void	find_player_position(t_game *game);
-void call_move(int keycode, t_game *data);
 //
 
 void	*malloc_img(t_map *map);
@@ -185,6 +184,11 @@ void	free_tank_img(t_game *data);
 void	free_enemy_img(t_game *data);
 //
 int	close_game(t_game *data);
+void	call_move(int keycode, t_game *data);
+void	move_right(t_game *data);
+void	move_left(t_game *data);
+void	move_down(t_game *data);
+void	move_up(t_game *data);
 
 #endif
 

@@ -27,59 +27,6 @@ int	key_hook(int keycode, t_game *data)
 	call_move(keycode, data);
 	return (0);
 }
-void	move_up(t_game *data)
-{
-	int count;
-
-	count = 1;
-	data->player->y -= 16;
-	while (data->player->y % TILE_SIZE != 0)
-	{
-		mlx_put_image_to_window(data->mlx, data->win, data->images->background, data->player->x, data->player->y + 16);
-		if (count % 2 == 1)
-			mlx_put_image_to_window(data->mlx, data->win, data->player->tank_2, data->player->x, data->player->y);
-		else
-			mlx_put_image_to_window(data->mlx, data->win, data->player->tank_1, data->player->x, data->player->y);
-		count++;
-		data->player->y -= 16;
-		printf("x:%d y:%d\n", (data->player->y) / 64, (data->player->x) / 64);
-	}
-	mlx_put_image_to_window(data->mlx, data->win, data->images->background, data->player->x, data->player->y + 16);
-	mlx_put_image_to_window(data->mlx, data->win, data->player->tank_1, data->player->x, data->player->y);
-}
-
-void	call_move(int keycode, t_game *data)
-{
-	printf("keykode: %d\n", keycode);
-	if (data->player->y % 64 != 0 && data->player->y % 64 != 0)
-		return ;
-	if ((keycode == UP)
-		&& data->map->map[(data->player->y - 16) / 64][(data->player->x) / 64] != '1')
-	{
-		printf("before: %d\n", data->player->y / 64);
-		move_up(data);
-		printf("after: %d\n", data->player->y / 64);
-		//data->player->y -= 16;
-	}
-	// else if ((keycode == DOWN)
-	// 	&& data->map->map[(data->player->y + 16) / 64][(data->player->x) / 64] != '1')
-	// {
-	// 	move_down(data);
-	// 	//data->player->y += 16;
-	// }
-	// else if ((keycode == LEFT)
-	// 	&& data->map->map[(data->player->y) / 64][(data->player->x - 16) / 64] != '1')
-	// {
-	// 	move_left(data);
-	// 	//data->player->x -=16;
-	// }
-	// else if ((keycode == RIGHT)
-	// 	&& data->map->map[(data->player->y) / 64][(data->player->x + 16) / 64] != '1')
-	// {
-	// 	move_right(data);
-	// 	//data->player->x +=16;
-	// }
-}
 
 void	render_map(t_map *map)
 {
@@ -103,7 +50,7 @@ void	render_map(t_map *map)
 		error_handling(MALLOC_ERROR);
 	}
 
-	data->win = mlx_new_window(data->mlx, map->width * 64, map->height * 64, "so_long");
+	data->win = mlx_new_window(data->mlx, map->width * TILE_SIZE, map->height * TILE_SIZE, "so_long");
 	if (!data->win)
 	{
 		perror("Failed to create window");

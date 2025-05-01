@@ -80,8 +80,6 @@ void	free_coin_img(t_game *data)
 		mlx_destroy_image(data->mlx, data->images->coin_lapata);
 	if (data->images && data->images->coin_kaska)
 		mlx_destroy_image(data->mlx, data->images->coin_kaska);
-	if (data->images && data->images->coin_grandat)
-		mlx_destroy_image(data->mlx, data->images->coin_grandat);
 	if (data->images && data->images->coin_bomb)
 		mlx_destroy_image(data->mlx, data->images->coin_bomb);
 }

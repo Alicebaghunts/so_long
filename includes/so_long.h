@@ -47,7 +47,6 @@ typedef struct s_map_images
 	void	*coin_time;
 	void	*coin_tank;
 	void	*coin_kaska;
-	void	*coin_grandat;
 	void	*coin_lapata;
 	void	*coin_bomb;
 	void	*renesnace_1;
@@ -120,6 +119,7 @@ typedef struct s_game
 	t_player		*player;
 	t_enemy			*enemy;
 	int         	moves;
+	int				direction;
 }	t_game;
 
 int		is_rectangular(t_map *matrix);

@@ -69,6 +69,13 @@ void	move_up(t_game *data)
 		|| ((data->map->map[new_y / TILE_SIZE]
 		[data->player->x / TILE_SIZE] == 'E') && data->map->coin != 0))
 		return;
+	if (data->direction != 1)
+	{
+		mlx_put_image_to_window(data->mlx, data->win, data->player->tank_1,
+			data->player->x, data->player->y);
+		data->direction = 1;
+		return ;
+	}
 	data->player->y -= 16;
 	while (data->player->y % TILE_SIZE != 0)
 	{
@@ -82,21 +89,19 @@ void	move_up(t_game *data)
 				data->player->x, data->player->y);
 		count++;
 		data->player->y -= 16;
-		tile_x = data->player->x / TILE_SIZE;
-		tile_y = data->player->y / TILE_SIZE;
-		if (data->map->map[tile_y][tile_x] == 'C')
-		{
-			data->map->map[tile_y][tile_x] = '0';
-			data->map->coin--;
-			printf("coin %d\n", data->map->coin);
-		}
-		if (data->map->map[tile_y][tile_x] == 'E' && data->map->coin == 0)
-		{
-			printf("Congratulations! You won in %d moves.\n", data->moves + 1);
-			free_all_characters(data);
-			free_all_data(data);
-			exit(0);
-		}
+	}
+	tile_x = data->player->x / TILE_SIZE;
+	tile_y = data->player->y / TILE_SIZE;
+	if (data->map->map[tile_y][tile_x] == 'C')
+	{
+		data->map->map[tile_y][tile_x] = '0';
+		data->map->coin--;
+	}
+	if (data->map->map[tile_y][tile_x] == 'E' && data->map->coin == 0)
+	{
+		free_all_characters(data);
+		free_all_data(data);
+		exit(0);
 	}
 	mlx_put_image_to_window(data->mlx, data->win, data->images->background,
 		data->player->x, data->player->y + 16);
@@ -118,6 +123,13 @@ void	move_down(t_game *data)
 		|| ((data->map->map[new_y / TILE_SIZE]
 		[data->player->x / TILE_SIZE] == 'E') && data->map->coin != 0))
 		return;
+	if (data->direction != 3)
+	{
+		mlx_put_image_to_window(data->mlx, data->win, data->player->tank_down_1,
+			data->player->x, data->player->y);
+		data->direction = 3;
+		return ;
+	}
 	data->player->y += 16;
 	while (data->player->y % TILE_SIZE != 0)
 	{
@@ -131,21 +143,19 @@ void	move_down(t_game *data)
 				data->player->tank_down_1, data->player->x, data->player->y);
 		count++;
 		data->player->y += 16;
-		tile_x = data->player->x / TILE_SIZE;
-		tile_y = data->player->y / TILE_SIZE;
-		if (data->map->map[tile_y][tile_x] == 'C')
-		{
-			data->map->map[tile_y][tile_x] = '0';
-			data->map->coin--;
-			printf("coin %d\n", data->map->coin);
-		}
-		if (data->map->map[tile_y][tile_x] == 'E' && data->map->coin == 0)
-		{
-			printf("Congratulations! You won in %d moves.\n", data->moves + 1);
-			free_all_characters(data);
-			free_all_data(data);
-			exit(0);
-		}
+	}
+	tile_x = data->player->x / TILE_SIZE;
+	tile_y = data->player->y / TILE_SIZE;
+	if (data->map->map[tile_y][tile_x] == 'C')
+	{
+		data->map->map[tile_y][tile_x] = '0';
+		data->map->coin--;
+	}
+	if (data->map->map[tile_y][tile_x] == 'E' && data->map->coin == 0)
+	{
+		free_all_characters(data);
+		free_all_data(data);
+		exit(0);
 	}
 	mlx_put_image_to_window(data->mlx, data->win, data->images->background,
 		data->player->x, data->player->y - 16);
@@ -154,6 +164,18 @@ void	move_down(t_game *data)
 	data->moves++;
 }
 
+
+
+void	check_valid_exit(t_game *data, int x, int y)
+{
+	if (data->map->map[y][x] == 'E' && data->map->coin == 0)
+	{
+		printf("Congratulations! You won");
+		free_all_characters(data);
+		free_all_data(data);
+		exit(0);
+	}
+}
 
 void	move_left(t_game *data)
 {
@@ -167,7 +189,14 @@ void	move_left(t_game *data)
 	if (data->map->map[data->player->y / TILE_SIZE][new_x / TILE_SIZE] == '1'
 		|| ((data->map->map[data->player->y / TILE_SIZE]
 		[new_x / TILE_SIZE]  == 'E') && data->map->coin != 0))
-		return;
+			return;
+	if (data->direction != 4)
+	{
+		mlx_put_image_to_window(data->mlx, data->win, data->player->tank_left_1,
+			data->player->x, data->player->y);
+		data->direction = 4;
+		return ;
+	}
 	data->player->x -= 16;
 	while (data->player->x % TILE_SIZE != 0)
 	{
@@ -181,21 +210,20 @@ void	move_left(t_game *data)
 				data->player->x, data->player->y);
 		count++;
 		data->player->x -= 16;
-		tile_x = data->player->x / TILE_SIZE;
-		tile_y = data->player->y / TILE_SIZE;
-		if (data->map->map[tile_y][tile_x] == 'C')
-		{
-			data->map->map[tile_y][tile_x] = '0';
-			data->map->coin--;
-			printf("coin %d\n", data->map->coin);
-		}
-		if (data->map->map[tile_y][tile_x] == 'E' && data->map->coin == 0)
-		{
-			printf("Congratulations! You won in %d moves.\n", data->moves + 1);
-			free_all_characters(data);
-			free_all_data(data);
-			exit(0);
-		}
+	}
+	tile_x = data->player->x / TILE_SIZE;
+	tile_y = data->player->y / TILE_SIZE;
+	if (data->map->map[tile_y][tile_x] == 'C')
+	{
+		data->map->map[tile_y][tile_x] = '0';
+		data->map->coin--;
+	}
+	if (data->map->map[tile_y][tile_x] == 'E' && data->map->coin == 0)
+	{
+		printf("Congratulations! You won in %d moves.\n", data->moves + 1);
+		free_all_characters(data);
+		free_all_data(data);
+		exit(0);
 	}
 	mlx_put_image_to_window(data->mlx, data->win, data->images->background,
 		data->player->x + 16, data->player->y);
@@ -218,6 +246,13 @@ void	move_right(t_game *data)
 		|| ((data->map->map[data->player->y / TILE_SIZE]
 		[new_x / TILE_SIZE]  == 'E') && data->map->coin != 0))
 		return;
+	if (data->direction != 2)
+	{
+		mlx_put_image_to_window(data->mlx, data->win, data->player->tank_right_1,
+			data->player->x, data->player->y);
+		data->direction = 2;
+		return ;
+	}
 	data->player->x += 16;
 	while (data->player->x % TILE_SIZE != 0)
 	{
@@ -231,23 +266,20 @@ void	move_right(t_game *data)
 				data->player->tank_right_1, data->player->x, data->player->y);
 		count++;
 		data->player->x += 16;
-
-		tile_x = data->player->x / TILE_SIZE;
-		tile_y = data->player->y / TILE_SIZE;
-
-		if (data->map->map[tile_y][tile_x] == 'C')
-		{
-			data->map->map[tile_y][tile_x] = '0';
-			data->map->coin--;
-			printf("coin %d\n", data->map->coin);
-		}
-		if (data->map->map[tile_y][tile_x] == 'E' && data->map->coin == 0)
-		{
-			printf("Congratulations! You won in %d moves.\n", data->moves + 1);
-			free_all_characters(data);
-			free_all_data(data);
-			exit(0);
-		}
+	}
+	tile_x = data->player->x / TILE_SIZE;
+	tile_y = data->player->y / TILE_SIZE;
+	if (data->map->map[tile_y][tile_x] == 'C')
+	{
+		data->map->map[tile_y][tile_x] = '0';
+		data->map->coin--;
+	}
+	if (data->map->map[tile_y][tile_x] == 'E' && data->map->coin == 0)
+	{
+		printf("Congratulations! You won in %d moves.\n", data->moves + 1);
+		free_all_characters(data);
+		free_all_data(data);
+		exit(0);
 	}
 	mlx_put_image_to_window(data->mlx, data->win, data->images->background,
 		data->player->x - 16, data->player->y);
@@ -260,6 +292,7 @@ void	move_right(t_game *data)
 void	call_move(int keycode, t_game *data)
 {
 	printf("keykode: %d\n", keycode);
+	printf("coin %d\n", data->map->coin);
 	if (data->player->x % TILE_SIZE != 0 || data->player->y % TILE_SIZE != 0)
    		return ;
 	if ((keycode == UP)

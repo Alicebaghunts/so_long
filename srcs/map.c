@@ -41,7 +41,8 @@ void	render_map(t_map *map)
 	data->images = malloc_img(data->map);
 	data->enemy = malloc_enemy(data->map, data->images);
 	data->player = malloc_tank(data->map, data->images, data->enemy);
-
+	data->direction = 1;
+	data->moves = 0;
 	data->mlx = mlx_init();
 	if (!data->mlx)
 	{
@@ -59,8 +60,6 @@ void	render_map(t_map *map)
 		free_all_data(data);
 		error_handling(MALLOC_ERROR);
 	}
-
-	//put_position(data->enemy);
 	put_images(data);
 	find_player_position(data);
 	mlx_hook(data->win, 17, 0, close_game, data);

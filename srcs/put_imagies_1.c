@@ -69,7 +69,7 @@ void	init_images_coin(t_map_images *images, void *mlx)
 			"textures/coin_tank.xpm", &images->x, &images->y);
 	images->coin_kaska = mlx_xpm_file_to_image(mlx,
 			"textures/coin_kaska.xpm", &images->x, &images->y);
-	images->coin_grandat = mlx_xpm_file_to_image(mlx,
+	images->coin_bomb = mlx_xpm_file_to_image(mlx,
 			"textures/coin_bomb.xpm", &images->x, &images->y);
 	images->coin_lapata = mlx_xpm_file_to_image(mlx,
 			"textures/coin_lapata.xpm", &images->x, &images->y);

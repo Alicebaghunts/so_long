@@ -68,7 +68,8 @@ void	move_up(t_game *data)
 	if (data->map->map[new_y / TILE_SIZE][data->player->x / TILE_SIZE] == '1'
 		|| ((data->map->map[new_y / TILE_SIZE]
 		[data->player->x / TILE_SIZE] == 'E') && data->map->coin != 0))
-		return;;
+		return;
+	data->player->y -= 16;
 	while (data->player->y % TILE_SIZE != 0)
 	{
 		mlx_put_image_to_window(data->mlx, data->win, data->images->background,
@@ -117,6 +118,7 @@ void	move_down(t_game *data)
 		|| ((data->map->map[new_y / TILE_SIZE]
 		[data->player->x / TILE_SIZE] == 'E') && data->map->coin != 0))
 		return;
+	data->player->y += 16;
 	while (data->player->y % TILE_SIZE != 0)
 	{
 		mlx_put_image_to_window(data->mlx, data->win, data->images->background,
@@ -166,6 +168,7 @@ void	move_left(t_game *data)
 		|| ((data->map->map[data->player->y / TILE_SIZE]
 		[new_x / TILE_SIZE]  == 'E') && data->map->coin != 0))
 		return;
+	data->player->x -= 16;
 	while (data->player->x % TILE_SIZE != 0)
 	{
 		mlx_put_image_to_window(data->mlx, data->win, data->images->background,
@@ -215,6 +218,7 @@ void	move_right(t_game *data)
 		|| ((data->map->map[data->player->y / TILE_SIZE]
 		[new_x / TILE_SIZE]  == 'E') && data->map->coin != 0))
 		return;
+	data->player->x += 16;
 	while (data->player->x % TILE_SIZE != 0)
 	{
 		mlx_put_image_to_window(data->mlx, data->win,

@@ -12,12 +12,13 @@
 
 #include "../includes/so_long.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 int	close_game(t_game *data)
 {
+	free_all_characters(data);
 	free_all_data(data);
 	exit(0);
-	return (0);
 }
 
 int	key_hook(int keycode, t_game *data)

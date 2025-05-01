@@ -119,6 +119,7 @@ typedef struct s_game
 	t_map_images	*images;
 	t_player		*player;
 	t_enemy			*enemy;
+	int         	moves;
 }	t_game;
 
 int		is_rectangular(t_map *matrix);
@@ -183,7 +184,7 @@ void	free_coin_img(t_game *data);
 void	free_tank_img(t_game *data);
 void	free_enemy_img(t_game *data);
 //
-int	close_game(t_game *data);
+int		close_game(t_game *data);
 void	call_move(int keycode, t_game *data);
 void	move_right(t_game *data);
 void	move_left(t_game *data);

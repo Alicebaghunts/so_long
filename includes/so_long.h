@@ -16,6 +16,8 @@
 # include <string.h>
 # include <sys/wait.h>
 # include <fcntl.h>
+# include <math.h>
+# include <limits.h>
 # include "../libft/libft.h"
 # include "../minilibx-linux/mlx.h"
 
@@ -25,12 +27,21 @@
 # define INVALID_MAP 4
 # define MALLOC_ERROR 5
 
+# define TANK_MOVE_ANIM_LIMIT 4096
+
 #  define TILE_SIZE 64
 #  define ESC 65307
-#  define UP 119
-#  define DOWN 115
-#  define LEFT 97
-#  define RIGHT 100
+
+#  define W 119
+#  define S 115
+#  define A 97
+#  define D 100
+
+#  define UP 1
+#  define DOWN 3
+#  define LEFT 4
+#  define RIGHT 2
+
 typedef struct s_map_images
 {
 	void	*background;
@@ -88,6 +99,9 @@ typedef struct s_player
 	int		y;
 	int		w;
 	int		h;
+	int		move_count;
+	int		frame_rate;
+	int		tank_img;
 }	t_player;
 
 typedef struct s_enemy
@@ -186,11 +200,13 @@ void	free_enemy_img(t_game *data);
 //
 int		close_game(t_game *data);
 void	call_move(int keycode, t_game *data);
-void	move_right(t_game *data);
-void	move_left(t_game *data);
-void	move_down(t_game *data);
-void	move_up(t_game *data);
+void	check_coin_and_exit(t_game *data, int x, int y);
 
+//move up
+void	handle_move_up(t_game *data);
+void	handle_move_down(t_game *data);
+void	handle_move_left(t_game *data);
+void	handle_move_right(t_game *data);
 #endif
 
 

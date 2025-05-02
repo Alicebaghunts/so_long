@@ -1,0 +1,4 @@
+*.o
+./build
+./so_long
+libft.a

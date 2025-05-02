@@ -36,6 +36,7 @@
 #  define S 115
 #  define A 97
 #  define D 100
+# define SP 32
 
 #  define UP 1
 #  define DOWN 3
@@ -102,6 +103,7 @@ typedef struct s_player
 	int		move_count;
 	int		frame_rate;
 	int		tank_img;
+	int		shoot_img;
 }	t_player;
 
 typedef struct s_enemy
@@ -122,6 +124,14 @@ typedef struct s_enemy
 	int		y;
 }	t_enemy;
 
+typedef struct s_bullet
+{
+	int x;
+	int y;
+	int direction;
+	int active;
+}	t_bullet;
+
 typedef struct s_game
 {
 	int				x;
@@ -132,9 +142,11 @@ typedef struct s_game
 	t_map_images	*images;
 	t_player		*player;
 	t_enemy			*enemy;
+	t_bullet		*bullet;
 	int         	moves;
 	int				direction;
-}	t_game;
+ }	t_game;
+
 
 int		is_rectangular(t_map *matrix);
 int		check_and_open_map_file(char *path);
@@ -207,6 +219,11 @@ void	handle_move_up(t_game *data);
 void	handle_move_down(t_game *data);
 void	handle_move_left(t_game *data);
 void	handle_move_right(t_game *data);
+
+//
+void	handle_tank_bullet(t_game *data);
+int		move_up_the_bullet(t_game *data);
+
 #endif
 
 

@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
-#include <math.h>
 
 static void	tank_move_left_animation(t_game *data)
 {

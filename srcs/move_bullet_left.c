@@ -1,23 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   move_shoot.c                                       :+:      :+:    :+:   */
+/*   move_bullet_left.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alisharu <marvin@42.fr>                    #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-05-02 15:12:12 by alisharu          #+#    #+#             */
-/*   Updated: 2025-05-02 15:12:12 by alisharu         ###   ########.fr       */
+/*   Created: 2025-05-03 17:50:56 by alisharu          #+#    #+#             */
+/*   Updated: 2025-05-03 17:50:56 by alisharu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
-#include <math.h>
-
-static void	bullet_move_up_animation(t_game *data)
-{
-		mlx_put_image_to_window(data->mlx, data->win, data->images->bullet_up,
-			data->bullet->x, data->bullet->y);
-}
 
 static int check_bullet_bounds(t_game *data, int bullet_x, int bullet_y)
 {
@@ -26,7 +19,13 @@ static int check_bullet_bounds(t_game *data, int bullet_x, int bullet_y)
     return 1;
 }
 
-int	move_up_the_bullet(t_game *data)
+static void	bullet_move_left_animation(t_game *data)
+{
+		mlx_put_image_to_window(data->mlx, data->win, data->images->bullet_left,
+			data->bullet->x, data->bullet->y);
+}
+
+int	move_left_the_bullet(t_game *data)
 {
 	float	copy_x;
 	float	copy_y;
@@ -37,20 +36,20 @@ int	move_up_the_bullet(t_game *data)
 	copy_y = (float)data->player->y / (float)TILE_SIZE;
 	bullet_x = (float)data->bullet->x / (float)TILE_SIZE;
 	bullet_y = (float)data->bullet->y / (float)TILE_SIZE;
-	if (!data->bullet->active || data->bullet->direction != UP)
+	if (!data->bullet->active || data->bullet->direction != LEFT)
 		return (0);
 	if (!check_bullet_bounds(data, bullet_x, bullet_y))
         return 0;
-	if ((data->map->map[(int)ceil(copy_y)][(int)ceil(copy_x)] == '1')
-		|| (data->map->map[(int)ceil(copy_y)][(int)ceil(copy_x)] == 'M')
-		|| (data->map->map[(int)ceil(copy_y)][(int)ceil(copy_x)] == 'E'))
+	if ((data->map->map[(int)ceil(copy_y)][(int)ceil(copy_x) - 1] == '1')
+		|| (data->map->map[(int)ceil(copy_y)][(int)ceil(copy_x) - 1] == 'M')
+		|| (data->map->map[(int)ceil(copy_y)][(int)ceil(copy_x) - 1] == 'E'))
 		{
 			data->bullet->active = 0;
 			return (0);
 		}
 		if (data->map->map[(int)ceil(bullet_y)][(int)ceil(bullet_x)] == 'C')
 		{
-			data->bullet->y -= BULLET_SPEED;
+			data->bullet->x -= BULLET_SPEED;
 			data->map->map[(int)ceil(bullet_y)][(int)ceil(bullet_x)] = '0';
 		}	
 	if (data->map->map[(int)ceil(bullet_y)][(int)ceil(bullet_x)] != '0')
@@ -62,14 +61,14 @@ int	move_up_the_bullet(t_game *data)
 	if (++data->bullet->frame_rate >= TANK_MOVE_ANIM_LIMIT)
 	{
 		mlx_put_image_to_window(data->mlx, data->win, data->images->background,
-			data->bullet->x, data->bullet->y);
+			data->bullet->x, data->bullet->x);
 		data->bullet->frame_rate = 0;
-		data->bullet->y -= BULLET_SPEED;
-		bullet_y = (float)data->bullet->y / (float)TILE_SIZE;
-		bullet_move_up_animation(data);
-		if ((data->map->map[(int)ceil(bullet_y) - 1][(int)ceil(bullet_x)] == '1')
-			|| (data->map->map[(int)ceil(bullet_y) - 1][(int)ceil(bullet_x)] == 'M')
-			|| (data->map->map[(int)ceil(bullet_y) - 1][(int)ceil(bullet_x)] == 'E'))
+		data->bullet->x -= BULLET_SPEED;
+		bullet_x = (float)data->bullet->x / (float)TILE_SIZE;
+		bullet_move_left_animation(data);
+		if ((data->map->map[(int)ceil(bullet_y)][(int)ceil(bullet_x) - 1] == '1')
+			|| (data->map->map[(int)ceil(bullet_y)][(int)ceil(bullet_x) - 1] == 'M')
+			|| (data->map->map[(int)ceil(bullet_y)][(int)ceil(bullet_x) - 1] == 'E'))
 		{
 			mlx_put_image_to_window(data->mlx, data->win, data->images->background,
 				data->bullet->x, data->bullet->y);
@@ -80,14 +79,15 @@ int	move_up_the_bullet(t_game *data)
 	return (0);
 }
 
-void	handle_tank_bullet_up(t_game *data)
+
+void	handle_tank_bullet_left(t_game *data)
 {
 	init_tank_bullet(data);
-	if ((data->map->map[(data->player->y - TILE_SIZE) / TILE_SIZE]
-		[(data->player->x) / TILE_SIZE] != '1')
-		|| (data->map->map[(data->player->y - TILE_SIZE) / TILE_SIZE]
-		[(data->player->x) / TILE_SIZE] != 'M')
-		|| (data->map->map[(data->player->y - TILE_SIZE) / TILE_SIZE]
-		[(data->player->x) / TILE_SIZE] != 'E'))
-		mlx_loop_hook(data->mlx, &move_up_the_bullet, data);
+	if ((data->map->map[(data->player->y) / TILE_SIZE]
+		[(data->player->x - TILE_SIZE) / TILE_SIZE] != '1')
+		|| (data->map->map[(data->player->y) / TILE_SIZE]
+		[(data->player->x - TILE_SIZE) / TILE_SIZE] != 'M')
+		|| (data->map->map[(data->player->y) / TILE_SIZE]
+		[(data->player->x - TILE_SIZE) / TILE_SIZE] != 'E'))
+		mlx_loop_hook(data->mlx, &move_left_the_bullet, data);
 }

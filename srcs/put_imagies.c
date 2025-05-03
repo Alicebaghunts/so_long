@@ -30,57 +30,57 @@ void	put_img_mandatory(t_game *data)
 {
 	if (data->map->map[data->y][data->x] == '1')
 		mlx_put_image_to_window(data->mlx, data->win,
-			data->images->wall, data->x * 64, data->y * 64);
+			data->images->wall, data->x * TILE_SIZE, data->y * TILE_SIZE);
 	else if (data->map->map[data->y][data->x] == '0')
 		mlx_put_image_to_window(data->mlx, data->win,
-			data->images->background, data->x * 64, data->y * 64);
+			data->images->background, data->x * TILE_SIZE, data->y * TILE_SIZE);
 	else if (data->map->map[data->y][data->x] == 'P')
 		mlx_put_image_to_window(data->mlx, data->win,
-			data->player->tank_1, data->x * 64, data->y * 64);
+			data->player->tank_1, data->x * TILE_SIZE, data->y * TILE_SIZE);
 	else if (data->map->map[data->y][data->x] == 'E')
 		mlx_put_image_to_window(data->mlx, data->win,
-			data->images->gerb, data->x * 64, data->y * 64);
+			data->images->gerb, data->x * TILE_SIZE, data->y * TILE_SIZE);
 	else if (data->map->map[data->y][data->x] == 'C')
 		mlx_put_image_to_window(data->mlx, data->win,
-			data->images->coin_star, data->x * 64, data->y * 64);
+			data->images->coin_star, data->x * TILE_SIZE, data->y * TILE_SIZE);
 }
 
 void	put_img_bonus_1(t_game *data)
 {
 	if (data->map->map[data->y][data->x] == 'B')
 		mlx_put_image_to_window(data->mlx, data->win,
-			data->images->coin_bomb, data->x * 64, data->y * 64);
+			data->images->coin_bomb, data->x * TILE_SIZE, data->y * TILE_SIZE);
 	else if (data->map->map[data->y][data->x] == 'L')
 		mlx_put_image_to_window(data->mlx, data->win,
-			data->images->coin_lapata, data->x * 64, data->y * 64);
+			data->images->coin_lapata, data->x * TILE_SIZE, data->y * TILE_SIZE);
 	else if (data->map->map[data->y][data->x] == 'Z')
 		mlx_put_image_to_window(data->mlx, data->win,
-			data->images->coin_star, data->x * 64, data->y * 64);
+			data->images->coin_star, data->x * TILE_SIZE, data->y * TILE_SIZE);
 	else if (data->map->map[data->y][data->x] == 'K')
 		mlx_put_image_to_window(data->mlx, data->win,
-			data->images->coin_kaska, data->x * 64, data->y * 64);
+			data->images->coin_kaska, data->x * TILE_SIZE, data->y * TILE_SIZE);
 	else if (data->map->map[data->y][data->x] == 'T')
 		mlx_put_image_to_window(data->mlx, data->win,
-			data->images->coin_time, data->x * 64, data->y * 64);
+			data->images->coin_time, data->x * TILE_SIZE, data->y * TILE_SIZE);
 	else if (data->map->map[data->y][data->x] == 'J')
 		mlx_put_image_to_window(data->mlx, data->win,
-			data->images->coin_time, data->x * 64, data->y * 64);
+			data->images->coin_time, data->x * TILE_SIZE, data->y * TILE_SIZE);
 	else if (data->map->map[data->y][data->x] == 'G')
 		mlx_put_image_to_window(data->mlx, data->win,
-			data->images->grass, data->x * 64, data->y * 64);
+			data->images->grass, data->x * TILE_SIZE, data->y * TILE_SIZE);
 }
 
 void	put_img_bonus_2(t_game *data)
 {
 	if (data->map->map[data->y][data->x] == 'W')
 		mlx_put_image_to_window(data->mlx, data->win,
-			data->images->water_1, data->x * 64, data->y * 64);
+			data->images->water_1, data->x * TILE_SIZE, data->y * TILE_SIZE);
 	else if (data->map->map[data->y][data->x] == 'M')
 		mlx_put_image_to_window(data->mlx, data->win,
-			data->images->metal, data->x * 64, data->y * 64);
+			data->images->metal, data->x * TILE_SIZE, data->y * TILE_SIZE);
 	else if (data->map->map[data->y][data->x] == 'G')
 		mlx_put_image_to_window(data->mlx, data->win,
-			data->images->grass, data->x * 64, data->y * 64);
+			data->images->grass, data->x * TILE_SIZE, data->y * TILE_SIZE);
 }
 
 void	putting(t_game *data)

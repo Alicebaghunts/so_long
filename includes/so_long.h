@@ -228,8 +228,11 @@ void	handle_move_left(t_game *data);
 void	handle_move_right(t_game *data);
 
 //
-void	handle_tank_bullet(t_game *data);
+void	handle_tank_bullet_up(t_game *data);
+void	handle_tank_bullet_down(t_game *data);
+void	handle_tank_bullet_left(t_game *data);
 int		move_up_the_bullet(t_game *data);
+void	init_tank_bullet(t_game *data);
 
 #endif
 

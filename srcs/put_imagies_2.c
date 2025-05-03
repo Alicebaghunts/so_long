@@ -52,4 +52,7 @@ void	init_characters(t_map_images *images, void *mlx)
 	images->background = mlx_xpm_file_to_image(mlx,
 			"textures/background.xpm", &images->x, &images->y);
 	images->bullet_up = mlx_xpm_file_to_image(mlx, "textures/bullet_up.xpm", &images->x, &images->y);
+	images->bullet_down = mlx_xpm_file_to_image(mlx, "textures/bullet_down.xpm", &images->x, &images->y);
+	images->bullet_left = mlx_xpm_file_to_image(mlx, "textures/bullet_left.xpm", &images->x, &images->y);
+	images->bullet_right = mlx_xpm_file_to_image(mlx, "textures/bullet_right.xpm", &images->x, &images->y);
 }

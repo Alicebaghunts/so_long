@@ -37,11 +37,11 @@ void	render_map(t_map *map)
 	if (!data)
 		error_handling(MALLOC_ERROR);
 	data->map = map;
-
-	data->images = malloc_img(data->map);
-	data->enemy = malloc_enemy(data->map, data->images);
-	data->player = malloc_tank(data->map, data->images, data->enemy);
-	data->direction = 1;
+	data->bullet = malloc_bullet(data->map);
+	data->images = malloc_img(data->bullet, data->map);
+	data->enemy = malloc_enemy(data->map, data->images, data->bullet);
+	data->player = malloc_tank(data->map, data->images, data->enemy, data->bullet);
+	data->player->direction = 1;
 	data->moves = 0;
 	data->mlx = mlx_init();
 	if (!data->mlx)

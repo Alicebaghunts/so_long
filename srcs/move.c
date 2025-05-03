@@ -31,6 +31,7 @@ void	check_coin_and_exit(t_game *data, int x, int y)
 void	call_move(int keycode, t_game *data)
 {
 	data->player->frame_rate = 0;
+	data->bullet->frame_rate = 0;
 	if (data->player->x % TILE_SIZE != 0 || data->player->y % TILE_SIZE != 0)
    		return ;
 	if (keycode == W)

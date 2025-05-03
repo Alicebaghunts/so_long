@@ -32,7 +32,8 @@ static int	move_left(t_game *data)
 
 	copy_x = (float)data->player->x / (float)TILE_SIZE;
 	copy_y = (float)data->player->y / (float)TILE_SIZE;
-	if (data->map->map[(int)ceil(copy_y)][(int)ceil(copy_x) - 1] == '1'
+	if ((data->map->map[(int)ceil(copy_y)][(int)ceil(copy_x) - 1] == '1')
+		|| (data->map->map[(int)ceil(copy_y)][(int)ceil(copy_x) - 1] == 'M')
 		|| ((data->map->map[(int)ceil(copy_y)][(int)ceil(copy_x) - 1] == 'E')
 		&& data->map->coin != 0))
 		return (0);
@@ -56,9 +57,9 @@ void	handle_move_left(t_game *data)
 {
 	data->player->move_count = 0;
 	data->player->tank_img = 0;
-	if (data->direction != LEFT)
+	if (data->player->direction != LEFT)
 	{
-		data->direction = LEFT;
+		data->player->direction = LEFT;
 		mlx_put_image_to_window(data->mlx, data->win, data->player->tank_left_1,
 			data->player->x, data->player->y);
 		return ;

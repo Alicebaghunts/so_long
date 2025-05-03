@@ -31,6 +31,7 @@ static int	move_up(t_game *data)
 	copy_x = (float)data->player->x / (float)TILE_SIZE;
 	copy_y = (float)data->player->y / (float)TILE_SIZE;
 	if (data->map->map[(int)ceil(copy_y) - 1][(int)ceil(copy_x)] == '1'
+		|| (data->map->map[(int)ceil(copy_y) - 1][(int)ceil(copy_x)] == 'M')
 		|| ((data->map->map[(int)ceil(copy_y) - 1][(int)ceil(copy_x)] == 'E')
 		&& data->map->coin != 0))
 		return (0);
@@ -54,14 +55,15 @@ void	handle_move_up(t_game *data)
 {
 	data->player->move_count = 0;
 	data->player->tank_img = 0;
-	if (data->direction != UP)
+	if (data->player->direction != UP)
 	{
-		data->direction = UP;
+		data->player->direction = UP;
 		mlx_put_image_to_window(data->mlx, data->win, data->player->tank_1,
 			data->player->x, data->player->y);
 		return ;
 	}
 	if (data->map->map[(data->player->y - TILE_SIZE) / TILE_SIZE]
-		[(data->player->x) / TILE_SIZE] != '1')
+		[(data->player->x) / TILE_SIZE] != '1' || data->map->map[(data->player->y - TILE_SIZE) / TILE_SIZE]
+		[(data->player->x) / TILE_SIZE] != 'M')
 		mlx_loop_hook(data->mlx, &move_up, data);
 }

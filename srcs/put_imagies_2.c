@@ -51,4 +51,5 @@ void	init_characters(t_map_images *images, void *mlx)
 	images->gerb = mlx_xpm_file_to_image(mlx, "textures/gerb.xpm", &images->x, &images->y);
 	images->background = mlx_xpm_file_to_image(mlx,
 			"textures/background.xpm", &images->x, &images->y);
+	images->bullet_up = mlx_xpm_file_to_image(mlx, "textures/bullet_up.xpm", &images->x, &images->y);
 }

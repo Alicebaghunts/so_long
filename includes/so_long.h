@@ -27,8 +27,8 @@
 # define INVALID_MAP 4
 # define MALLOC_ERROR 5
 
-# define TANK_MOVE_ANIM_LIMIT 4096
-
+# define TANK_MOVE_ANIM_LIMIT 2048
+# define BULLET_SPEED 16
 #  define TILE_SIZE 64
 #  define ESC 65307
 
@@ -52,6 +52,10 @@ typedef struct s_map_images
 	void	*metal;
 	void	*grass;
 	void	*pulya;
+	void	*bullet_up;
+	void	*bullet_down;
+	void	*bullet_left;
+	void	*bullet_right;
 	void	*water_1;
 	void	*water_2;
 	void	*water_3;
@@ -100,6 +104,7 @@ typedef struct s_player
 	int		y;
 	int		w;
 	int		h;
+	int		direction;
 	int		move_count;
 	int		frame_rate;
 	int		tank_img;
@@ -130,6 +135,8 @@ typedef struct s_bullet
 	int y;
 	int direction;
 	int active;
+	int	frame_rate;
+	int	bullet_count;
 }	t_bullet;
 
 typedef struct s_game
@@ -144,7 +151,6 @@ typedef struct s_game
 	t_enemy			*enemy;
 	t_bullet		*bullet;
 	int         	moves;
-	int				direction;
  }	t_game;
 
 
@@ -197,10 +203,11 @@ void	put_img_bonus_2(t_game *data);
 void	error_handling_map(t_map *map, int fd);
 void	find_player_position(t_game *game);
 //
-
-void	*malloc_img(t_map *map);
-t_enemy	*malloc_enemy(t_map *map, t_map_images *img);
-t_player	*malloc_tank(t_map *map, t_map_images *img, t_enemy *enemy);
+t_bullet		*malloc_bullet(t_map *map);
+t_map_images	*malloc_img(t_bullet *bullet, t_map *map);
+t_enemy			*malloc_enemy(t_map *map, t_map_images *img, t_bullet *bullet);
+t_player		*malloc_tank(t_map *map, t_map_images *img, t_enemy *enemy,
+	t_bullet *bullet);
 //
 void	free_all_data(t_game *data);
 void	free_all_characters(t_game *data);

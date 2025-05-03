@@ -102,6 +102,8 @@ void	free_characters_1(t_game *data)
 		mlx_destroy_image(data->mlx, data->images->grass);
 	if (data->images && data->images->pulya)
 		mlx_destroy_image(data->mlx, data->images->pulya);
+	if (data->images && data->images->bullet_up)
+		mlx_destroy_image(data->mlx, data->images->bullet_up);
 	if (data->images && data->images->water_1)
 		mlx_destroy_image(data->mlx, data->images->water_1);
 	if (data->images && data->images->water_2)

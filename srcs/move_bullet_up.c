@@ -37,20 +37,27 @@ int	move_up_the_bullet(t_game *data)
 	copy_y = (float)data->player->y / (float)TILE_SIZE;
 	bullet_x = (float)data->bullet->x / (float)TILE_SIZE;
 	bullet_y = (float)data->bullet->y / (float)TILE_SIZE;
-	if (!data->bullet->active || data->bullet->direction != UP)
-		return (0);
 	if (!check_bullet_bounds(data, bullet_x, bullet_y))
         return 0;
 	if ((data->map->map[(int)ceil(copy_y)][(int)ceil(copy_x)] == '1')
 		|| (data->map->map[(int)ceil(copy_y)][(int)ceil(copy_x)] == 'M')
 		|| (data->map->map[(int)ceil(copy_y)][(int)ceil(copy_x)] == 'E'))
-		{
+	{
+		data->bullet->active = 0;
+		return (0);
+	}
+	if ((data->map->map[(int)ceil(bullet_y)][(int)ceil(bullet_x)] == '0')
+		&& (data->map->map[(int)ceil(bullet_y) - 1][(int)ceil(bullet_x)] == 'M'
+		|| data->map->map[(int)ceil(bullet_y) - 1][(int)ceil(bullet_x)] == 'E'
+		|| data->map->map[(int)ceil(bullet_y) - 1][(int)ceil(bullet_x)] == '1'))
+	{
+		mlx_put_image_to_window(data->mlx, data->win, data->images->background,
+			data->bullet->x, data->bullet->y);
 			data->bullet->active = 0;
-			return (0);
-		}
+			mlx_loop_hook(data->mlx, NULL, NULL);
+	}
 	if (data->map->map[(int)ceil(bullet_y)][(int)ceil(bullet_x)] == 'C')
 	{
-		data->bullet->y -= BULLET_SPEED;
 		data->map->coin--;
 		printf("coin count - %d\n", data->map->coin);
 		data->map->map[(int)ceil(bullet_y)][(int)ceil(bullet_x)] = '0';
@@ -60,7 +67,6 @@ int	move_up_the_bullet(t_game *data)
 		data->bullet->active = 0;
 		return 0;
 	}
-
 	if (++data->bullet->frame_rate >= TANK_MOVE_ANIM_LIMIT)
 	{
 		mlx_put_image_to_window(data->mlx, data->win, data->images->background,

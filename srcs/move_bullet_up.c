@@ -48,11 +48,13 @@ int	move_up_the_bullet(t_game *data)
 			data->bullet->active = 0;
 			return (0);
 		}
-		if (data->map->map[(int)ceil(bullet_y)][(int)ceil(bullet_x)] == 'C')
-		{
-			data->bullet->y -= BULLET_SPEED;
-			data->map->map[(int)ceil(bullet_y)][(int)ceil(bullet_x)] = '0';
-		}	
+	if (data->map->map[(int)ceil(bullet_y)][(int)ceil(bullet_x)] == 'C')
+	{
+		data->bullet->y -= BULLET_SPEED;
+		data->map->coin--;
+		printf("coin count - %d\n", data->map->coin);
+		data->map->map[(int)ceil(bullet_y)][(int)ceil(bullet_x)] = '0';
+	}
 	if (data->map->map[(int)ceil(bullet_y)][(int)ceil(bullet_x)] != '0')
 	{
 		data->bullet->active = 0;
@@ -67,10 +69,21 @@ int	move_up_the_bullet(t_game *data)
 		data->bullet->y -= BULLET_SPEED;
 		bullet_y = (float)data->bullet->y / (float)TILE_SIZE;
 		bullet_move_up_animation(data);
-		if ((data->map->map[(int)ceil(bullet_y) - 1][(int)ceil(bullet_x)] == '1')
+		if (((data->map->map[(int)ceil(bullet_y) - 1][(int)ceil(bullet_x)] == '1')
+			&& (data->map->map[(int)ceil(bullet_y)][(int)ceil(bullet_x)] != 'C'))
 			|| (data->map->map[(int)ceil(bullet_y) - 1][(int)ceil(bullet_x)] == 'M')
 			|| (data->map->map[(int)ceil(bullet_y) - 1][(int)ceil(bullet_x)] == 'E'))
 		{
+			mlx_put_image_to_window(data->mlx, data->win, data->images->background,
+				data->bullet->x, data->bullet->y);
+			data->bullet->active = 0;
+			mlx_loop_hook(data->mlx, NULL, NULL);
+		}
+		else if ((data->map->map[(int)ceil(bullet_y) - 1][(int)ceil(bullet_x)] == '1')
+		&& (data->map->map[(int)ceil(bullet_y)][(int)ceil(bullet_x)] == 'C'))
+		{	
+			data->map->coin--;
+			printf("count coin -> %d\n", data->map->coin);
 			mlx_put_image_to_window(data->mlx, data->win, data->images->background,
 				data->bullet->x, data->bullet->y);
 			data->bullet->active = 0;

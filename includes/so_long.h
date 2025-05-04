@@ -137,6 +137,10 @@ typedef struct s_bullet
 	int active;
 	int	frame_rate;
 	int	bullet_count;
+	float	copy_bullet_x;
+	float	copy_bullet_y;
+	float	copy_player_x;
+	float	copy_player_y;
 }	t_bullet;
 
 typedef struct s_game

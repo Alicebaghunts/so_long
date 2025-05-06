@@ -12,12 +12,25 @@
 
 #include "../includes/so_long.h"
 
+int	check_bullet_bounds(t_game *data, int x, int y)
+{
+	return (!(y < 0 || y >= data->map->height || x < 0
+			|| x >= data->map->width));
+}
+
+void	remove_bullet(t_game *data)
+{
+	mlx_put_image_to_window(data->mlx, data->win, data->images->background,
+		data->bullet->x, data->bullet->y);
+	data->bullet->active = 0;
+	mlx_loop_hook(data->mlx, NULL, NULL);
+}
+
 void	init_tank_bullet(t_game *data)
 {
 	if (data->bullet->active == 1)
 		return ;
 	data->bullet->direction = data->player->direction;
-
 	if (data->player->direction == UP)
 	{
 		data->bullet->x = data->player->x;
@@ -39,6 +52,7 @@ void	init_tank_bullet(t_game *data)
 		data->bullet->y = data->player->y;
 	}
 	data->bullet->active = 1;
+	data->bullet->bullet_count = 0;
 }
 
 void	check_coin_and_exit(t_game *data, int x, int y)
@@ -62,7 +76,7 @@ void	call_move(int keycode, t_game *data)
 	data->player->frame_rate = 0;
 	data->bullet->frame_rate = 0;
 	if (data->player->x % TILE_SIZE != 0 || data->player->y % TILE_SIZE != 0)
-   		return ;
+		return ;
 	if (keycode == W)
 		handle_move_up(data);
 	else if (keycode == S)
@@ -76,7 +90,7 @@ void	call_move(int keycode, t_game *data)
 	else if (keycode == SP && data->player->direction == DOWN)
 		handle_tank_bullet_down(data);
 	else if (keycode == SP && data->player->direction == RIGHT)
-		handle_tank_bullet_up(data);
+		handle_tank_bullet_right(data);
 	else if (keycode == SP && data->player->direction == LEFT)
 		handle_tank_bullet_left(data);
 }

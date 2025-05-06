@@ -11,97 +11,72 @@
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
-#include <math.h>
-#include <string.h>
 
-static void	bullet_move_up_animation(t_game *data)
+static void	checks_the_next_bullet_cordinate(t_game *data)
 {
-		mlx_put_image_to_window(data->mlx, data->win, data->images->bullet_up,
-			data->bullet->x, data->bullet->y);
-}
+	int		bullet_x;
+	int		bullet_y;
+	int		next_y;
+	char	next_tile;
+	char	current_tile;
 
-static int check_bullet_bounds(t_game *data, int bullet_x, int bullet_y)
-{
-    if (bullet_y < 0 || bullet_y >= data->map->height || bullet_x < 0
-		|| bullet_x >= data->map->width)
-        return 0;
-    return 1;
-}
-
-static void checks_the_next_bullet_cordinate(t_game *data)
-{
-	if ((data->map->map[(int)ceil(data->bullet->copy_bullet_y)]
-	[(int)ceil(data->bullet->copy_bullet_x)] == '0')
-	&& (data->map->map[(int)ceil(data->bullet->copy_bullet_y) - 1]
-	[(int)ceil(data->bullet->copy_bullet_x)] == 'M'
-	|| data->map->map[(int)ceil(data->bullet->copy_bullet_y) - 1]
-	[(int)ceil(data->bullet->copy_bullet_x)] == 'E'
-	|| data->map->map[(int)ceil(data->bullet->copy_bullet_y) - 1]
-	[(int)ceil(data->bullet->copy_bullet_x)] == '1'))
-	{
-		mlx_put_image_to_window(data->mlx, data->win, data->images->background,
-			data->bullet->x, data->bullet->y);
-			data->bullet->active = 0;
-			mlx_loop_hook(data->mlx, NULL, NULL);
-	}
+	bullet_x = (int)ceil(data->bullet->copy_bullet_x);
+	bullet_y = (int)ceil(data->bullet->copy_bullet_y);
+	next_y = bullet_y - 1;
+	next_tile = data->map->map[next_y][bullet_x];
+	current_tile = data->map->map[bullet_y][bullet_x];
+	if ((current_tile == '0' || current_tile == 'C') && (next_tile == 'M'
+			|| next_tile == 'E' || next_tile == '1'))
+		remove_bullet(data);
 }
 
 static void	check_the_coin_part(t_game *data)
 {
-	if ((data->map->map[(int)ceil(data->bullet->copy_bullet_y)]
-	[(int)ceil(data->bullet->copy_bullet_x)] == 'C')
-	&& (data->map->map[(int)ceil(data->bullet->copy_bullet_y) - 1]
-	[(int)ceil(data->bullet->copy_bullet_x)] != '1'))
-	{
-		data->map->coin--;
-		data->map->map[(int)ceil(data->bullet->copy_bullet_y)]
-		[(int)ceil(data->bullet->copy_bullet_x)] = '0';
-	}
-	else if ((data->map->map[(int)ceil(data->bullet->copy_bullet_y) - 1]
-	[(int)ceil(data->bullet->copy_bullet_x)] == '1')
-	&& (data->map->map[(int)ceil(data->bullet->copy_bullet_y)]
-	[(int)ceil(data->bullet->copy_bullet_x)] == 'C'))
-	{	
-		data->map->coin--;
-		mlx_put_image_to_window(data->mlx, data->win, data->images->background,
-			data->bullet->x, data->bullet->y);
-		data->bullet->active = 0;
-		mlx_loop_hook(data->mlx, NULL, NULL);
-	}
-}
+	int	bullet_x;
+	int	bullet_y;
+	int	next_y;
 
-static void check_bullet_exit_logic(t_game *data)
-{
-	if (((data->map->map[(int)ceil(data->bullet->copy_bullet_y) - 1]
-	[(int)ceil(data->bullet->copy_bullet_x)] == '1')
-	&& (data->map->map[(int)ceil(data->bullet->copy_bullet_y)]
-	[(int)ceil(data->bullet->copy_bullet_x)] != 'C'))
-	|| (data->map->map[(int)ceil(data->bullet->copy_bullet_y) - 1]
-	[(int)ceil(data->bullet->copy_bullet_x)] == 'M')
-	|| (data->map->map[(int)ceil(data->bullet->copy_bullet_y) - 1]
-	[(int)ceil(data->bullet->copy_bullet_x)] == 'E'))
+	bullet_x = (int)ceil(data->bullet->copy_bullet_x);
+	bullet_y = (int)ceil(data->bullet->copy_bullet_y);
+	next_y = bullet_y - 1;
+	if (data->map->map[bullet_y][bullet_x] == 'C')
+	{
+		if (data->map->map[next_y][bullet_x] != '1'
+			&& data->map->map[next_y][bullet_x] != 'M'
+			&& data->map->map[next_y][bullet_x] != 'E')
 		{
-			mlx_put_image_to_window(data->mlx, data->win,
-				data->images->background, data->bullet->x, data->bullet->y);
-			data->bullet->active = 0;
-			mlx_loop_hook(data->mlx, NULL, NULL);
+			data->map->coin--;
+			data->map->map[bullet_y][bullet_x] = '0';
 		}
+		else
+			remove_bullet(data);
+	}
 }
 
-int	move_up_the_bullet(t_game *data)
+static void	check_bullet_exit_logic(t_game *data)
 {
-	data->bullet->copy_bullet_x = (float)data->bullet->x / (float)TILE_SIZE;
-	data->bullet->copy_bullet_y = (float)data->bullet->y / (float)TILE_SIZE;
-	if (!check_bullet_bounds(data, data->bullet->copy_bullet_x,
-		data->bullet->copy_bullet_y))
-        return 0;
-	if (data->map->map[(int)ceil(data->bullet->copy_bullet_y)]
-	[(int)ceil(data->bullet->copy_bullet_x)] != '0')
-	{
-		data->bullet->active = 0;
-		return 0;
-	}
-	checks_the_next_bullet_cordinate(data);
+	int	bullet_x;
+	int	bullet_y;
+	int	next_y;
+
+	bullet_x = (int)ceil(data->bullet->copy_bullet_x);
+	bullet_y = (int)ceil(data->bullet->copy_bullet_y);
+	next_y = bullet_y - 1;
+	if ((((data->map->map[next_y][bullet_x] == '1')
+			&& (data->map->map[bullet_y][bullet_x] != 'C'))
+			|| (data->map->map[next_y][bullet_x] == 'M')
+			|| (data->map->map[next_y][bullet_x] == 'E'))
+			&& data->bullet->bullet_count == 8)
+		remove_bullet(data);
+}
+
+static void	main_logic_bullet(t_game *data)
+{
+	int	next_player_y;
+	int	current_player_x;
+
+	next_player_y = (int)data->bullet->copy_player_y - 1;
+	current_player_x = (int)data->bullet->copy_player_x;
 	if (++data->bullet->frame_rate >= TANK_MOVE_ANIM_LIMIT)
 	{
 		mlx_put_image_to_window(data->mlx, data->win, data->images->background,
@@ -109,21 +84,26 @@ int	move_up_the_bullet(t_game *data)
 		data->bullet->frame_rate = 0;
 		data->bullet->y -= BULLET_SPEED;
 		data->bullet->copy_bullet_y = (float)data->bullet->y / (float)TILE_SIZE;
-		bullet_move_up_animation(data);
+		data->bullet->bullet_count += 1;
+		mlx_put_image_to_window(data->mlx, data->win, data->images->bullet_up,
+			data->bullet->x, data->bullet->y);
 		check_bullet_exit_logic(data);
 		check_the_coin_part(data);
 	}
-	return (0);
 }
 
-void	handle_tank_bullet_up(t_game *data)
+int	move_up_the_bullet(t_game *data)
 {
-	init_tank_bullet(data);
-	if ((data->map->map[(data->player->y - TILE_SIZE) / TILE_SIZE]
-		[(data->player->x) / TILE_SIZE] != '1')
-		|| (data->map->map[(data->player->y - TILE_SIZE) / TILE_SIZE]
-		[(data->player->x) / TILE_SIZE] != 'M')
-		|| (data->map->map[(data->player->y - TILE_SIZE) / TILE_SIZE]
-		[(data->player->x) / TILE_SIZE] != 'E'))
-		mlx_loop_hook(data->mlx, &move_up_the_bullet, data);
+	data->bullet->copy_bullet_x = (float)data->bullet->x / (float)TILE_SIZE;
+	data->bullet->copy_bullet_y = (float)data->bullet->y / (float)TILE_SIZE;
+	data->bullet->copy_player_x = (float)data->player->x / (float)TILE_SIZE;
+	data->bullet->copy_player_y = (float)data->player->y / (float)TILE_SIZE;
+	if (!check_bullet_bounds(data, data->bullet->copy_bullet_x,
+			data->bullet->copy_bullet_y))
+		return (0);
+	checks_the_next_bullet_cordinate(data);
+	if (data->bullet->bullet_count >= 8)
+		return (remove_bullet(data), 0);
+	main_logic_bullet(data);
+	return (0);
 }

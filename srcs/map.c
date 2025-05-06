@@ -11,8 +11,6 @@
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
-#include <stdio.h>
-#include <stdlib.h>
 
 int	close_game(t_game *data)
 {
@@ -40,7 +38,8 @@ void	render_map(t_map *map)
 	data->bullet = malloc_bullet(data->map);
 	data->images = malloc_img(data->bullet, data->map);
 	data->enemy = malloc_enemy(data->map, data->images, data->bullet);
-	data->player = malloc_tank(data->map, data->images, data->enemy, data->bullet);
+	data->player = malloc_tank(data->map, data->images, data->enemy,
+			data->bullet);
 	data->player->direction = 1;
 	data->moves = 0;
 	data->mlx = mlx_init();
@@ -51,8 +50,8 @@ void	render_map(t_map *map)
 		free_all_data(data);
 		error_handling(MALLOC_ERROR);
 	}
-
-	data->win = mlx_new_window(data->mlx, map->width * TILE_SIZE, map->height * TILE_SIZE, "so_long");
+	data->win = mlx_new_window(data->mlx, map->width * TILE_SIZE, map->height
+			* TILE_SIZE, "so_long");
 	if (!data->win)
 	{
 		perror("Failed to create window");
@@ -63,10 +62,9 @@ void	render_map(t_map *map)
 	put_images(data);
 	find_player_position(data);
 	mlx_hook(data->win, 17, 0, close_game, data);
-	mlx_key_hook(data->win, &key_hook, data);
+	mlx_hook(data->win, 2, 1, &key_hook, data);
 	mlx_loop(data->mlx);
 }
-
 
 char	**resize_map(char **map, int *map_size)
 {
@@ -89,11 +87,11 @@ char	**resize_map(char **map, int *map_size)
 
 char	**read_in_map_file(int fd)
 {
-	char	**map;
-	char	*line;
-	char	*pxik;
-	int		height;
-	int		map_size;
+	char **map;
+	char *line;
+	char *pxik;
+	int height;
+	int map_size;
 
 	map = malloc(sizeof(char *) * 10);
 	if (!map)

@@ -23,7 +23,7 @@ static void	tank_move_up_animation(t_game *data)
 			data->player->x, data->player->y);
 }
 
-static int	move_up(t_game *data)
+int	move_up(t_game *data)
 {
 	float	copy_x;
 	float	copy_y;
@@ -33,7 +33,7 @@ static int	move_up(t_game *data)
 	if (data->map->map[(int)ceil(copy_y) - 1][(int)ceil(copy_x)] == '1'
 		|| (data->map->map[(int)ceil(copy_y) - 1][(int)ceil(copy_x)] == 'M')
 		|| ((data->map->map[(int)ceil(copy_y) - 1][(int)ceil(copy_x)] == 'E')
-		&& data->map->coin != 0))
+			&& data->map->coin != 0))
 		return (0);
 	if (++data->player->frame_rate >= TANK_MOVE_ANIM_LIMIT)
 	{
@@ -62,8 +62,9 @@ void	handle_move_up(t_game *data)
 			data->player->x, data->player->y);
 		return ;
 	}
-	if (data->map->map[(data->player->y - TILE_SIZE) / TILE_SIZE]
-		[(data->player->x) / TILE_SIZE] != '1' || data->map->map[(data->player->y - TILE_SIZE) / TILE_SIZE]
-		[(data->player->x) / TILE_SIZE] != 'M')
+	if (data->map->map[(data->player->y - TILE_SIZE)
+			/ TILE_SIZE][(data->player->x) / TILE_SIZE] != '1'
+		|| data->map->map[(data->player->y - TILE_SIZE)
+		/ TILE_SIZE][(data->player->x) / TILE_SIZE] != 'M')
 		mlx_loop_hook(data->mlx, &move_up, data);
 }

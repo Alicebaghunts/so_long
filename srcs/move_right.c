@@ -58,13 +58,13 @@ void	handle_move_right(t_game *data)
 	if (data->player->direction != RIGHT)
 	{
 		data->player->direction = RIGHT;
-		mlx_put_image_to_window(data->mlx, data->win, data->player->tank_right_1,
-			data->player->x, data->player->y);
+		mlx_put_image_to_window(data->mlx, data->win,
+			data->player->tank_right_1, data->player->x, data->player->y);
 		return ;
 	}
 	if (data->map->map[(data->player->y) / TILE_SIZE]
 		[(data->player->x + TILE_SIZE) / TILE_SIZE] != '1'
-		|| data->map->map[(data->player->y) / TILE_SIZE]
+		&& data->map->map[(data->player->y) / TILE_SIZE]
 		[(data->player->x + TILE_SIZE) / TILE_SIZE] != 'M')
 		mlx_loop_hook(data->mlx, &move_right, data);
 }

@@ -12,49 +12,6 @@
 
 #include "../includes/so_long.h"
 
-int	check_bullet_bounds(t_game *data, int x, int y)
-{
-	return (!(y < 0 || y >= data->map->height || x < 0
-			|| x >= data->map->width));
-}
-
-void	remove_bullet(t_game *data)
-{
-	mlx_put_image_to_window(data->mlx, data->win, data->images->background,
-		data->bullet->x, data->bullet->y);
-	data->bullet->active = 0;
-	mlx_loop_hook(data->mlx, NULL, NULL);
-}
-
-void	init_tank_bullet(t_game *data)
-{
-	if (data->bullet->active == 1)
-		return ;
-	data->bullet->direction = data->player->direction;
-	if (data->player->direction == UP)
-	{
-		data->bullet->x = data->player->x;
-		data->bullet->y = data->player->y - TILE_SIZE;
-	}
-	else if (data->player->direction == DOWN)
-	{
-		data->bullet->x = data->player->x;
-		data->bullet->y = data->player->y + TILE_SIZE;
-	}
-	else if (data->player->direction == LEFT)
-	{
-		data->bullet->x = data->player->x - TILE_SIZE;
-		data->bullet->y = data->player->y;
-	}
-	else if (data->player->direction == RIGHT)
-	{
-		data->bullet->x = data->player->x + TILE_SIZE;
-		data->bullet->y = data->player->y;
-	}
-	data->bullet->active = 1;
-	data->bullet->bullet_count = 0;
-}
-
 void	check_coin_and_exit(t_game *data, int x, int y)
 {
 	if (data->map->map[y][x] == 'C')
@@ -74,7 +31,6 @@ void	check_coin_and_exit(t_game *data, int x, int y)
 void	call_move(int keycode, t_game *data)
 {
 	data->player->frame_rate = 0;
-	data->bullet->frame_rate = 0;
 	if (data->player->x % TILE_SIZE != 0 || data->player->y % TILE_SIZE != 0)
 		return ;
 	if (keycode == W)
@@ -85,12 +41,4 @@ void	call_move(int keycode, t_game *data)
 		handle_move_left(data);
 	else if (keycode == D)
 		handle_move_right(data);
-	else if (keycode == SP && data->player->direction == UP)
-		handle_tank_bullet_up(data);
-	else if (keycode == SP && data->player->direction == DOWN)
-		handle_tank_bullet_down(data);
-	else if (keycode == SP && data->player->direction == RIGHT)
-		handle_tank_bullet_right(data);
-	else if (keycode == SP && data->player->direction == LEFT)
-		handle_tank_bullet_left(data);
 }

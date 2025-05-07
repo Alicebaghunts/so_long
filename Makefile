@@ -6,7 +6,7 @@ SRC             = ./srcs
 
 BUILD           = ./build
 
-INCLUDES        = -Iincludes -Iminilibx-linux
+INCLUDES        = -I../includes -Iminilibx-linux
 
 LIBFT_DIR       = ./libft
 
@@ -20,7 +20,7 @@ SRCS            = $(wildcard $(SRC)/*.c)
 OBJS            = $(patsubst $(SRC)/%.c, $(BUILD)/%.o, $(SRCS))
 
 CC              = cc
-CFLAGS          = -Wall -Wextra -Werror $(INCLUDES) -g3 -fsanitize=address 
+CFLAGS          = -Wall -Wextra -Werror $(INCLUDES) 
 
 RESET           = \033[0m
 GREEN           = \033[0;32m

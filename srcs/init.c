@@ -22,26 +22,6 @@ void	init_map_first(t_map *map, int width, int height)
 	map->width = width;
 }
 
-void	malloc_map(t_map *map)
-{
-	int	i;
-
-	map->map = (char **)malloc(sizeof(char *) * map->height);
-	if (map->map == NULL)
-		error_handling(MALLOC_ERROR);
-	i = 0;
-	while (i < map->height)
-	{
-		map->map[i] = (char *)malloc(sizeof(char) * (map->width + 1));
-		if (map->map[i] == NULL)
-		{
-			free(map->map);
-			error_handling(MALLOC_ERROR);
-		}
-		i++;
-	}
-}
-
 int	check_and_open_map_file(char *path)
 {
 	char	**split;

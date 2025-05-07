@@ -26,10 +26,7 @@ int	main(int argc, char **argv)
 	if (!map)
 		error_handling(MALLOC_ERROR);
 	map->map = map_array;
-	printf("map_array\n\n");
-	print_matrix(map->map);
 	init_map_first(map, find_width(map), find_height(map));
-	printf("width -> %d\nheight - > %d\n", find_width(map), find_height(map));
 	checking(map, fd);
 	render_map(map);
 

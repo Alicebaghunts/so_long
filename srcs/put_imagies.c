@@ -12,18 +12,44 @@
 
 #include "../includes/so_long.h"
 
-void	put_images(t_game *data)
+void	init_characters(t_map_images *images, void *mlx)
 {
-	if (!data->images || !data->player || !data->enemy)
-		error_handling(MALLOC_ERROR);
-	init_characters(data->images, data->mlx);
-	init_images_kill(data->images, data->mlx);
-	init_images_coin(data->images, data->mlx);
-	init_images_tank(data->player, data->mlx);
-	init_images_enemy(data->enemy, data->mlx);
-	init_images_water(data->images, data->mlx);
-	init_images_renesince(data->images, data->mlx);
-	putting(data);
+	images->wall = mlx_xpm_file_to_image(mlx, "textures/wall.xpm", &images->x,
+			&images->y);
+	images->metal = mlx_xpm_file_to_image(mlx, "textures/metal.xpm", &images->x,
+			&images->y);
+	images->gerb = mlx_xpm_file_to_image(mlx, "textures/gerb.xpm", &images->x,
+			&images->y);
+	images->background = mlx_xpm_file_to_image(mlx, "textures/background.xpm",
+			&images->x, &images->y);
+	images->coin_star = mlx_xpm_file_to_image(mlx, "textures/coin_star.xpm",
+			&images->x, &images->y);
+	images->coin_bomb = mlx_xpm_file_to_image(mlx, "textures/coin_bomb.xpm",
+			&images->x, &images->y);
+}
+
+void	init_images_tank(t_player *tank, void *mlx)
+{
+	tank->tank_1 = mlx_xpm_file_to_image(mlx, "textures/tank_1.xpm", &tank->w,
+			&tank->h);
+	tank->tank_2 = mlx_xpm_file_to_image(mlx, "textures/tank_2.xpm", &tank->w,
+			&tank->h);
+	tank->tank_left_1 = mlx_xpm_file_to_image(mlx, "textures/tank_left_1.xpm",
+			&tank->w, &tank->h);
+	tank->tank_left_2 = mlx_xpm_file_to_image(mlx, "textures/tank_left_2.xpm",
+			&tank->w, &tank->h);
+	tank->tank_right_1 = mlx_xpm_file_to_image(mlx, "textures/tank_right_1.xpm",
+			&tank->w, &tank->h);
+	tank->tank_right_2 = mlx_xpm_file_to_image(mlx, "textures/tank_right_2.xpm",
+			&tank->w, &tank->h);
+	tank->tank_down_1 = mlx_xpm_file_to_image(mlx, "textures/tank_down_1.xpm",
+			&tank->w, &tank->h);
+	tank->tank_down_2 = mlx_xpm_file_to_image(mlx, "textures/tank_down_2.xpm",
+			&tank->w, &tank->h);
+	tank->tank_up_1 = mlx_xpm_file_to_image(mlx, "textures/tank_up_1.xpm",
+			&tank->w, &tank->h);
+	tank->tank_up_2 = mlx_xpm_file_to_image(mlx, "textures/tank_up_2.xpm",
+			&tank->w, &tank->h);
 }
 
 void	put_img_mandatory(t_game *data)
@@ -41,49 +67,20 @@ void	put_img_mandatory(t_game *data)
 		mlx_put_image_to_window(data->mlx, data->win, data->images->gerb,
 			data->x * TILE_SIZE, data->y * TILE_SIZE);
 	else if (data->map->map[data->y][data->x] == 'C')
-	{
 		mlx_put_image_to_window(data->mlx, data->win, data->images->coin_star,
-			data->x * TILE_SIZE, data->y * TILE_SIZE);
-		data->coin_count++;
-	}
-}
-
-void	put_img_bonus_1(t_game *data)
-{
-	if (data->map->map[data->y][data->x] == 'B')
-		mlx_put_image_to_window(data->mlx, data->win, data->images->coin_bomb,
-			data->x * TILE_SIZE, data->y * TILE_SIZE);
-	else if (data->map->map[data->y][data->x] == 'L')
-		mlx_put_image_to_window(data->mlx, data->win, data->images->coin_lapata,
-			data->x * TILE_SIZE, data->y * TILE_SIZE);
-	else if (data->map->map[data->y][data->x] == 'Z')
-		mlx_put_image_to_window(data->mlx, data->win, data->images->coin_star,
-			data->x * TILE_SIZE, data->y * TILE_SIZE);
-	else if (data->map->map[data->y][data->x] == 'K')
-		mlx_put_image_to_window(data->mlx, data->win, data->images->coin_kaska,
-			data->x * TILE_SIZE, data->y * TILE_SIZE);
-	else if (data->map->map[data->y][data->x] == 'T')
-		mlx_put_image_to_window(data->mlx, data->win, data->images->coin_time,
-			data->x * TILE_SIZE, data->y * TILE_SIZE);
-	else if (data->map->map[data->y][data->x] == 'J')
-		mlx_put_image_to_window(data->mlx, data->win, data->images->coin_time,
-			data->x * TILE_SIZE, data->y * TILE_SIZE);
-	else if (data->map->map[data->y][data->x] == 'G')
-		mlx_put_image_to_window(data->mlx, data->win, data->images->grass,
-			data->x * TILE_SIZE, data->y * TILE_SIZE);
-}
-
-void	put_img_bonus_2(t_game *data)
-{
-	if (data->map->map[data->y][data->x] == 'W')
-		mlx_put_image_to_window(data->mlx, data->win, data->images->water_1,
 			data->x * TILE_SIZE, data->y * TILE_SIZE);
 	else if (data->map->map[data->y][data->x] == 'M')
 		mlx_put_image_to_window(data->mlx, data->win, data->images->metal,
 			data->x * TILE_SIZE, data->y * TILE_SIZE);
-	else if (data->map->map[data->y][data->x] == 'G')
-		mlx_put_image_to_window(data->mlx, data->win, data->images->grass,
-			data->x * TILE_SIZE, data->y * TILE_SIZE);
+}
+
+void	put_images(t_game *data)
+{
+	if (!data->images || !data->player)
+		error_handling(MALLOC_ERROR);
+	init_characters(data->images, data->mlx);
+	init_images_tank(data->player, data->mlx);
+	putting(data);
 }
 
 void	putting(t_game *data)
@@ -95,8 +92,6 @@ void	putting(t_game *data)
 		while (data->x < data->map->width)
 		{
 			put_img_mandatory(data);
-			put_img_bonus_1(data);
-			put_img_bonus_2(data);
 			data->x++;
 		}
 		data->y++;

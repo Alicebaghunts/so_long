@@ -30,6 +30,7 @@ void	error_handling(int num)
 
 void	error_handling_map(t_map *map, int fd)
 {
+	(void)map;
 	close(fd);
 	ft_free_matrix(map->map);
 	free(map);
@@ -63,6 +64,11 @@ void	ft_free_matrix(char **arr)
 	if (!arr)
 		return ;
 	while (arr[i])
-		free(arr[i++]);
+	{
+		free(arr[i]);
+		arr[i] = NULL;
+		i++;
+	}
 	free(arr);
+	arr = NULL;
 }

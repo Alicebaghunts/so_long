@@ -5,206 +5,150 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: alisharu <marvin@42.fr>                    #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-04-29 13:14:15 by alisharu          #+#    #+#             */
-/*   Updated: 2025-04-29 13:14:15 by alisharu         ###   ########.fr       */
+/*   Created: 2025-05-07 16:47:50 by alisharu          #+#    #+#             */
+/*   Updated: 2025-05-07 16:47:50 by alisharu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-const int directions[4][2] = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
-
-void	flood_fill(char **map, int startX, int startY, int **visited, t_map *m)
+t_game	position(t_map *map)
 {
-	int	*queueX;
-	int	*queueY;
-	int	front;
-	int	back;
-	int	x;
-	int	y;
-	int	i;
-	int	nx;
-	int	ny;
+	t_game	ij;
 
-	front = 0;
-	back = 0;
-	queueY = malloc(m->width * m->height * sizeof(int));
-	queueX = malloc(m->width * m->height * sizeof(int));
-	queueX[back] = startX;
-	queueY[back] = startY;
-	back++;
-	while (front < back)
+	ij.x = 0;
+	if (!map)
+		return (ij);
+	while (ij.x < map->height)
 	{
-		x = queueX[front];
-		y = queueY[front];
-		front++;
-		if (visited[y][x])
-			continue ;
-		visited[y][x] = 1;
-		i = 0;
-		while (i < 4)
+		ij.y = 0;
+		while (ij.y < map->width)
 		{
-			nx = x + directions[i][0];
-			ny = y + directions[i][1];
-			if (nx >= 0 && ny >= 0 && nx < m->width && ny < m->height)
-			{
-				if (!visited[ny][nx] && (map[ny][nx] == '0'
-					|| map[ny][nx] == 'P' || map[ny][nx] == 'C'
-					|| map[ny][nx] == 'E'))
-				{
-					queueX[back] = nx;
-					queueY[back] = ny;
-					back++;
-				}
-			}
-			i++;
+			if (map->map[ij.x][ij.y] == 'P')
+				return (ij);
+			ij.y++;
 		}
+		ij.x++;
 	}
-	free(queueX);
-	free(queueY);
+	return (ij);
 }
 
-int	check_valid_path_to_exit(t_map *map)
+t_game	position_e(t_map *map, char **copy)
 {
-	int	**visited;
-	int	playerX;
-	int	playerY;
-	int foundExit;
-	int	x;
-	int	y;
+	t_game	ij;
 
-	playerX = -1;
-	playerY = -1;
-	foundExit = 0;
-	x = 0;
-	y = 0;
-	while (y < map->height)
+	ij.x = 0;
+	if (!map)
+		return (ij);
+	while (ij.x < map->height)
 	{
-		x = 0;
-		while (x < map->width)
+		ij.y = 0;
+		while (ij.y < map->width)
 		{
-			if (map->map[y][x] == 'P')
-			{
-				playerX = x;
-				playerY = y;
-				break ;
-			}
-			x++;
+			if (copy[ij.x][ij.y] == 'E')
+				return (ij);
+			ij.y++;
 		}
-		if (playerX != -1)
-			break ;
-		y++;
+		ij.x++;
 	}
-	if (playerX == -1 || playerY == -1)
-		return (0);
-	visited = malloc(map->height * sizeof(int *));
-	y = 0;
-	while (y < map->height)
-	{
-		visited[y] = malloc(map->width * sizeof(int));
-		y++;
-	}
-	flood_fill(map->map, playerX, playerY, visited, map);
-	y = 0;
-	while (y < map->height)
-	{
-		x = 0;
-		while (x < map->width)
-		{
-			if (map->map[y][x] == 'E' && visited[y][x] == 1)
-			{
-				foundExit = 1;
-				break ;
-			}
-			x++;
-		}
-		if (foundExit)
-			break ;
-		y++;
-	}
-	y = 0;
-	while (y < map->height)
-		free(visited[y++]);
-	free(visited);
-	return (foundExit);
+	return (ij);
 }
 
-int	check_valid_path_to_coins(t_map *map)
+static void	dfs(char **map, t_map *s, int i, int j)
 {
-	int	**visited;
-	int	playerX;
-	int	playerY;
-	int coinPaths;
-	int	x;
-	int	y;
-
-	playerX = -1;
-	playerY = -1;
-	x = 0;
-	y = 0;
-	coinPaths = 0;
-	while (y < map->height)
-	{
-		x = 0;
-		while (x < map->width)
-		{
-			if (map->map[y][x] == 'P')
-			{
-				playerX = x;
-				playerY = y;
-				break ;
-			}
-			x++;
-		}
-		if (playerX != -1)
-			break ;
-		y++;
-	}
-	if (playerX == -1 || playerY == -1)
-		return (0);
-	visited = malloc(map->height * sizeof(int *));
-	y = 0;
-	while (y < map->height)
-		visited[y++] = malloc(map->width * sizeof(int));
-	flood_fill(map->map, playerX, playerY, visited, map);
-	y = 0;
-	while (y < map->height)
-	{
-		x = 0;
-		while (x < map->width)
-		{
-			if (map->map[y][x] == 'C' && visited[y][x] == 1)
-			{
-				coinPaths++;
-				if (coinPaths >= 2)
-				{
-					y = 0;
-					while (y < map->height)
-					{
-						free(visited[y]);
-						y++;
-					}
-					free(visited);
-					return (1);
-				}
-			}
-			x++;
-		}
-		y++;
-	}
-	y = 0;
-	while (y < map->height)
-		free(visited[y++]);
-	free(visited);
-	return (0);
+	if (i < 0 || j < 0 || i >= s->height || j >= s->width)
+		return ;
+	if (map[i][j] == '1' || map[i][j] == 'V')
+		return ;
+	map[i][j] = 'V';
+	dfs(map, s, i + 1, j);
+	dfs(map, s, i - 1, j);
+	dfs(map, s, i, j + 1);
+	dfs(map, s, i, j - 1);
 }
 
-int	checking_valid_way_to_exit(t_map *map)
+static char	**copy_map(t_map *map)
 {
-	return (check_valid_path_to_exit(map));
+	char	**res;
+	int		i;
+	int		j;
+
+	res = malloc(map->height * sizeof(char));
+	i = 0;
+	printf("%d %d\n", map->height, map->width);
+	while (i < map->height)
+	{
+		j = 0;
+		printf("aa\n");
+		res[i] = malloc(map->width * sizeof(char));
+		while (j < map->width)
+		{
+			res[i][j] = map->map[i][j];
+			j++;
+		}
+		i++;
+	}
+	return (res);
 }
 
-int	checking_valid_way_to_coin(t_map *map)
+int	flood_fill_for_e(t_map *map)
 {
-	return (check_valid_path_to_coins(map));
+	int		i;
+	int		j;
+	char	**copy;
+
+	copy = copy_map(map);
+	i = position(map).x;
+	j = position(map).y;
+	dfs(copy, map, i, j);
+	i = 1;
+	while (i < map->height)
+	{
+		j = 1;
+		while (j < map->width)
+		{
+			if (copy[i][j] == 'E')
+			{
+				ft_free_matrix(copy);
+				return (0);
+			}
+			j++;
+		}
+		i++;
+	}
+	ft_free_matrix(copy);
+	return (1);
+}
+
+int	flood_fill_for_c(t_map *map)
+{
+	int i;
+	int j;
+	char **copy;
+
+	copy = copy_map(map);
+	i = position(map).x;
+	j = position(map).y;
+	printf("qq\n");
+	copy[position_e(map, copy).x][position_e(map, copy).y] = '1';
+	dfs(copy, map, i, j);
+	i = 1;
+	while (i < map->height)
+	{
+		j = 1;
+		while (j < map->width)
+		{
+			if (copy[i][j] == 'C')
+			{
+				printf("qq\n");
+				ft_free_matrix(copy);
+				return (0);
+			}
+			j++;
+		}
+		i++;
+	}
+	printf("qq\n");
+	ft_free_matrix(copy);
+	return (1);
 }

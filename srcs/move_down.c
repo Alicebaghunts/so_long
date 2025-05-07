@@ -64,7 +64,7 @@ void	handle_move_down(t_game *data)
 	}
 	if (data->map->map[(data->player->y + TILE_SIZE) / TILE_SIZE]
 		[(data->player->x) / TILE_SIZE] != '1'
-		|| data->map->map[(data->player->y + TILE_SIZE) / TILE_SIZE]
+		&& data->map->map[(data->player->y + TILE_SIZE) / TILE_SIZE]
 		[(data->player->x) / TILE_SIZE] != 'M')
 		mlx_loop_hook(data->mlx, &move_down, data);
 }

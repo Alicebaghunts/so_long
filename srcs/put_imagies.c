@@ -72,6 +72,9 @@ void	put_img_mandatory(t_game *data)
 	else if (data->map->map[data->y][data->x] == 'M')
 		mlx_put_image_to_window(data->mlx, data->win, data->images->metal,
 			data->x * TILE_SIZE, data->y * TILE_SIZE);
+	else if (data->map->map[data->y][data->x] == 'B')
+		mlx_put_image_to_window(data->mlx, data->win, data->images->coin_bomb,
+			data->x * TILE_SIZE, data->y * TILE_SIZE);
 }
 
 void	put_images(t_game *data)

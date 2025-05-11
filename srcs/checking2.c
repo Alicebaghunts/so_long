@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
+
 void	checking(t_map *map, int fd)
 {
 	if (is_rectangular(map) == 0)
@@ -25,10 +26,10 @@ void	checking(t_map *map, int fd)
 		error_handling_map(map, fd);
 	if (checking_all_characters(map) == 0)
 		error_handling_map(map, fd);
-	if (flood_fill_for_e(map) == 0)
-		error_handling_map(map, fd);
-	if (flood_fill_for_c(map) == 0)
-		error_handling_map(map, fd);
+	// if (flood_fill_for_e(map) == 0)
+	// 	error_handling_map(map, fd);
+	// if (flood_fill_for_c(map) == 0)
+	// 	error_handling_map(map, fd);
 }
 
 int	is_rectangular(t_map *matrix)

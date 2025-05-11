@@ -26,6 +26,8 @@ void	check_coin_and_exit(t_game *data, int x, int y)
 		free_all_data(data);
 		exit(0);
 	}
+	if (data->map->map[y][x] == 'B')
+		close_game(data);
 }
 
 void	call_move(int keycode, t_game *data)

@@ -127,7 +127,8 @@ int	checking_all_characters(t_map *map)
 		{
 			if (map->map[i][j] != '0' && map->map[i][j] != '1'
 				&& map->map[i][j] != 'C' && map->map[i][j] != 'E'
-				&& map->map[i][j] != 'M' && map->map[i][j] != 'P')
+				&& map->map[i][j] != 'M' && map->map[i][j] != 'P'
+				&& map->map[i][j] != 'B')
 				return (0);
 			j++;
 		}

@@ -26,7 +26,6 @@ char	*future_next_line(char *line)
 		count++;
 	if (!line[count] || !line[count + 1])
 		return (free(line), line = NULL, NULL);
-	printf("%d %d -%s-\n", ft_strlen(line), count, line);
 	buffer = (char *)malloc(sizeof(char) * (ft_strlen(line) - count));
 	if (buffer == NULL)
 		return (free(line), line = NULL, NULL);

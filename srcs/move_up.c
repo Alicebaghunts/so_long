@@ -11,8 +11,6 @@
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
-#include <math.h>
-
 
 static void	tank_move_up_animation(t_game *data)
 {
@@ -37,6 +35,7 @@ int	move_up(t_game *data)
 		|| ((data->map->map[(int)ceil(copy_y) - 1][(int)ceil(copy_x)] == 'E')
 			&& data->map->coin != 0))
 		return (0);
+	check_coin_and_exit(data, ceil(copy_x), ceil(copy_y) - 1);
 	if (++data->player->frame_rate >= TANK_MOVE_ANIM_LIMIT)
 	{
 		mlx_put_image_to_window(data->mlx, data->win, data->images->background,
@@ -46,7 +45,6 @@ int	move_up(t_game *data)
 		copy_y = (float)data->player->y / (float)TILE_SIZE;
 		tank_move_up_animation(data);
 		data->player->move_count++;
-		check_coin_and_exit(data, copy_x, copy_y);
 		if (data->player->move_count == 8)
 			mlx_loop_hook(data->mlx, NULL, NULL);
 	}

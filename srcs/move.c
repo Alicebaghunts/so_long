@@ -16,16 +16,14 @@ void	check_coin_and_exit(t_game *data, int x, int y)
 {
 	if (data->map->map[y][x] == 'C')
 	{
+		mlx_put_image_to_window(data->mlx, data->win, data->images->background,
+			x * TILE_SIZE, y * TILE_SIZE);
 		data->map->map[y][x] = '0';
 		data->map->coin--;
 		return ;
 	}
 	if (data->map->map[y][x] == 'E' && data->map->coin == 0)
-	{
-		free_all_characters(data);
-		free_all_data(data);
-		exit(0);
-	}
+		close_game(data);
 	if (data->map->map[y][x] == 'B')
 		close_game(data);
 }

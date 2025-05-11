@@ -35,6 +35,7 @@ static int	move_down(t_game *data)
 		|| ((data->map->map[(int)floor(copy_y) + 1][(int)floor(copy_x)] == 'E')
 		&& data->map->coin != 0))
 		return (0);
+	check_coin_and_exit(data, floor(copy_x), floor(copy_y) + 1);
 	if (++data->player->frame_rate >= TANK_MOVE_ANIM_LIMIT)
 	{
 		mlx_put_image_to_window(data->mlx, data->win, data->images->background,
@@ -44,7 +45,6 @@ static int	move_down(t_game *data)
 		copy_y = (float)data->player->y / (float)TILE_SIZE;
 		tank_move_down_animation(data);
 		data->player->move_count++;
-		check_coin_and_exit(data, copy_x, copy_y);
 		if (data->player->move_count == 8)
 			mlx_loop_hook(data->mlx, NULL, NULL);
 	}

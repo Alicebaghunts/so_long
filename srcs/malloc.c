@@ -21,7 +21,6 @@ t_game	*malloc_data(t_map *map)
 	{
 		ft_free_matrix(map->map);
 		free(map);
-		perror("Memory allocation failed for t_game");
 		error_handling(MALLOC_ERROR);
 	}
 	data->map = map;
@@ -42,7 +41,6 @@ t_map_images	*malloc_img(t_game *data)
 		ft_free_matrix(data->map->map);
 		free(data->map);
 		free(data);
-		perror("Memory allocation failed for images");
 		error_handling(MALLOC_ERROR);
 	}
 	return (img);
@@ -59,7 +57,6 @@ t_player	*malloc_tank(t_game *data)
 		ft_free_matrix(data->map->map);
 		free(data->map);
 		free(data);
-		perror("Memory allocation failed for tank images");
 		error_handling(MALLOC_ERROR);
 	}
 	return (tank);

@@ -73,7 +73,6 @@ int	find_player_x_cordinate(t_map *map)
 	return (-1);
 }
 
-
 int	find_player_y_cordinate(t_map *map)
 {
 	int		y;

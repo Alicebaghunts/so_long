@@ -12,7 +12,6 @@
 
 #include "../includes/so_long.h"
 
-
 void	render_map(t_map *map)
 {
 	t_game	*data;
@@ -51,6 +50,25 @@ char	**resize_map(char **map, int *map_size)
 	return (new_map);
 }
 
+static char	**malloc_copy_map(void)
+{
+	char	**map;
+
+	map = malloc(sizeof(char *) * 10);
+	if (!map)
+		error_handling(MALLOC_ERROR);
+	return (map);
+}
+
+static void	check_height(int height, char **map)
+{
+	if (height == 0)
+	{
+		free(map);
+		error_handling(INVALID_MAP);
+	}
+}
+
 char	**read_in_map_file(int fd)
 {
 	char	**map;
@@ -59,12 +77,11 @@ char	**read_in_map_file(int fd)
 	int		height;
 	int		map_size;
 
-	map = malloc(sizeof(char *) * 10);
-	if (!map)
-		error_handling(MALLOC_ERROR);
+	map = malloc_copy_map();
 	map_size = 10;
 	height = 0;
-	while ((line = get_next_line(fd)) != NULL)
+	line = get_next_line(fd);
+	while (line != NULL)
 	{
 		pxik = ft_strtrim(line, "\n");
 		free(line);
@@ -73,11 +90,8 @@ char	**read_in_map_file(int fd)
 		if (height >= map_size)
 			map = resize_map(map, &map_size);
 		map[height++] = pxik;
+		line = get_next_line(fd);
 	}
-	if (height == 0)
-	{
-		free(map);
-		error_handling(INVALID_MAP);
-	}
+	check_height(height, map);
 	return (map[height] = NULL, map);
 }

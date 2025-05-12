@@ -66,5 +66,9 @@ void	handle_move_right(t_game *data)
 		[(data->player->x + TILE_SIZE) / TILE_SIZE] != '1'
 		&& data->map->map[(data->player->y) / TILE_SIZE]
 		[(data->player->x + TILE_SIZE) / TILE_SIZE] != 'M')
+	{
+		data->moves += 1;
+		show_moves(data);
 		mlx_loop_hook(data->mlx, &move_right, data);
+	}
 }

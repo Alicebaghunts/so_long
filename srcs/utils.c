@@ -24,7 +24,6 @@ void	error_handling(int num)
 		ft_putstr_fd("❌ \033[31mError: Invalid map\e[0m\n", 2);
 	else if (num == 5)
 		ft_putstr_fd("❌ \033[31mError: Failed to malloc\e[0m\n", 2);
-
 	exit(num);
 }
 
@@ -54,21 +53,4 @@ int	find_width(t_map *map)
 	if (map == NULL || map->map == NULL || map->map[0] == NULL)
 		return (0);
 	return (ft_strlen(map->map[0]));
-}
-
-void	ft_free_matrix(char **arr)
-{
-	int	i;
-
-	i = 0;
-	if (!arr)
-		return ;
-	while (arr[i])
-	{
-		free(arr[i]);
-		arr[i] = NULL;
-		i++;
-	}
-	free(arr);
-	arr = NULL;
 }

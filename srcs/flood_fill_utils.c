@@ -58,7 +58,8 @@ void	dfs(char **map, t_map *s, int i, int j)
 {
 	if (i < 0 || j < 0 || i >= s->height || j >= s->width)
 		return ;
-	if (map[i][j] == '1' || map[i][j] == 'V')
+	if (map[i][j] == '1' || map[i][j] == 'V' || map[i][j] == 'M'
+		|| map[i][j] == 'B')
 		return ;
 	map[i][j] = 'V';
 	dfs(map, s, i + 1, j);

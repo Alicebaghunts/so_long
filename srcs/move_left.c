@@ -23,7 +23,6 @@ static void	tank_move_left_animation(t_game *data)
 			data->player->x, data->player->y);
 }
 
-
 static int	move_left(t_game *data)
 {
 	float	copy_x;
@@ -67,5 +66,9 @@ void	handle_move_left(t_game *data)
 		[(data->player->x - TILE_SIZE) / TILE_SIZE] != '1'
 		&& data->map->map[(data->player->y) / TILE_SIZE]
 		[(data->player->x - TILE_SIZE) / TILE_SIZE] != 'M')
+	{
+		data->moves += 1;
+		show_moves(data);
 		mlx_loop_hook(data->mlx, &move_left, data);
+	}
 }

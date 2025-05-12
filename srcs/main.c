@@ -29,7 +29,6 @@ int	main(int argc, char **argv)
 	init_map_first(map, find_width(map), find_height(map));
 	checking(map, fd);
 	render_map(map);
-
 	close(fd);
 	return (0);
 }

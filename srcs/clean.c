@@ -56,7 +56,6 @@ void	free_characters_1(t_game *data)
 		mlx_destroy_image(data->mlx, data->images->coin_bomb);
 }
 
-
 void	free_all_characters(t_game *data)
 {
 	if (data)
@@ -90,4 +89,21 @@ void	free_all_data(t_game *data)
 		free(data->images);
 	if (data)
 		free(data);
+}
+
+void	ft_free_matrix(char **arr)
+{
+	int	i;
+
+	i = 0;
+	if (!arr)
+		return ;
+	while (arr[i])
+	{
+		free(arr[i]);
+		arr[i] = NULL;
+		i++;
+	}
+	free(arr);
+	arr = NULL;
 }

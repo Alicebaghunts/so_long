@@ -58,18 +58,6 @@ Here is an example of a simple valid map:
      Error\n
      [Explicit error message]
      ```
-
-### Example of a Minimal `.ber` Map
-Below is an example of a minimal `.ber` map:
-```
-1111111111111111111111111111111111
-1E0000000000000C00000C000000000001
-1010010100100000101001000000010101
-1010010010101010001001000000010101
-1P0000000C00C0000000000000000000C1
-1111111111111111111111111111111111
-```
-
 ---
 
 ## Gameplay
@@ -79,44 +67,8 @@ Once the map is validated, the player can navigate through the map to:
 
 ---
 
-## Bonus Features
-If the mandatory part is implemented perfectly (i.e., all requirements are satisfied and no malfunctions exist), additional bonus features may be implemented for extra points. The bonus features include:
-1. **Enemy Patrols**:
-   - The player loses the game if they touch an enemy patrol.
-
 2. **Sprite Animation**:
    - Add animations for the game sprites to enhance visual appeal.
-
-3. **Movement Count Display**:
-   - Display the movement count directly on the screen instead of writing it to the shell.
-
-### Note on Bonus Evaluation
-- The bonus part will only be evaluated if the **mandatory part is PERFECT**.
-- A perfect implementation means the mandatory part works flawlessly without any errors or malfunctions.
-
----
-
-## Additional Notes
-- The program must be able to parse any map file as long as it follows the rules specified above.
-- Any additional files or folders created for the bonus part must be justified during evaluation.
-
----
-
-## Error Handling
-- All errors will result in an immediate program exit with the message:
-  ```
-  Error\n
-  [Explicit error message]
-  ```
-
 ---
 
 ## How to Run
-1. Ensure your map file follows the rules outlined above.
-2. Run the program with the map file as input.
-3. Enjoy the game!
-
----
-
-## Future Scope
-While this project focuses on the core mechanics, further graphic-intensive projects await, so it is advised not to spend excessive time on bonus features.

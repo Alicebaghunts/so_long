@@ -32,6 +32,7 @@ CFLAGS          = -Wall -Wextra -Werror $(INCLUDES)
 RESET           = \033[0m
 GREEN           = \033[0;32m
 YELLOW          = \033[1;33m
+VIOLET			= \033[38;2;138;43;226m
 CYAN            = \033[1;36m
 RED             = \033[0;31m
 
@@ -72,8 +73,7 @@ $(NAME): $(OBJS)
 	@echo "${CYAN}░▒▓███████▓▒░░▒▓████████▓▒░ ░▒▓█▓▒░      ░▒▓█▓▒░   ░▒▓█▓▒░      ░▒▓██████▓▒░        ░▒▓█▓▒░      ░▒▓█▓▒░  ░▒▓█▓▒░    ░▒▓██████▓▒░  $(RESET)"
 	@echo "${CYAN}░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░      ░▒▓█▓▒░   ░▒▓█▓▒░      ░▒▓█▓▒░             ░▒▓█▓▒░      ░▒▓█▓▒░  ░▒▓█▓▒░      ░▒▓█▓▒░     $(RESET)"
 	@echo "${CYAN}░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░      ░▒▓█▓▒░   ░▒▓█▓▒░      ░▒▓█▓▒░             ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░  ░▒▓█▓▒░      ░▒▓█▓▒░     $(RESET)"
-	@echo "${CYAN}░▒▓███████▓▒░░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░      ░▒▓█▓▒░   ░▒▓████████▓▒░▒▓████████▓▒░       ░▒▓██████▓▒░░▒▓█▓▒░  ░▒▓█▓▒░      ░▒▓█▓▒░     $(RESET)"
-	@echo                                                                                                                                                                                                                                                        
+	@echo "${CYAN}░▒▓███████▓▒░░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░      ░▒▓█▓▒░   ░▒▓████████▓▒░▒▓████████▓▒░       ░▒▓██████▓▒░░▒▓█▓▒░  ░▒▓█▓▒░      ░▒▓█▓▒░     $(RESET)"                                                                                                                                                                                                                                                       
 	@echo "${CYAN}so_long created${RESET}"
 	@echo "$(CYAN)----------------------------------------------------------$(RESET)"
 	@echo "$(CYAN)| $(CYAN)Usage$(CYAN)         $(CYAN)|$(CYAN) ./so_long <map_file> $(CYAN)                  |$(CYAN)$(RESET)"
@@ -95,16 +95,32 @@ fclean: clean
 re: fclean all
 
 help:
-	@echo "$(CYAN)        $(RESET)"
-	@echo "$(CYAN)-------------------------------------------------------$(RESET)"
-	@echo "$(CYAN)|$(CYAN) $(GREEN) so_long Info$(GREEN)                                      $(CYAN)|$(CYAN)$(RESET)"
-	@echo "$(CYAN)-------------------------------------------------------$(RESET)"
-	@echo "$(CYAN)|$(CYAN)                                                     $(CYAN)|$(CYAN)$(RESET)"
-	@echo "$(CYAN)|$(CYAN) $(GREEN)./so_long <map_file>$(GREEN)                              $(CYAN)|$(CYAN)$(RESET)"
-	@echo "$(CYAN)|$(CYAN) $(GREEN) Example: ./so_long maps/map.ber$(GREEN)                  $(CYAN)|$(CYAN)$(RESET)"
-	@echo "$(CYAN)-------------------------------------------------------$(RESET)"
-	@echo "$(CYAN)|$(CYAN)                                                     $(CYAN)|$(CYAN)$(RESET)"
-	@echo "$(CYAN)|$(CYAN) $(GREEN) Use valid map files for testing$(GREEN)                 $(CYAN)|$(CYAN)$(RESET)"
-	@echo "$(CYAN)-------------------------------------------------------$(RESET)"
+	@echo "$(VIOLET)        $(RESET)"
+	@echo "$(VIOLET)-------------------------------------------------------$(RESET)"
+	@echo "$(VIOLET)|$(VIOLET) $(CYAN) so_long Info$(CYAN)                                       $(VIOLET)|$(VIOLET)$(RESET)"
+	@echo "$(VIOLET)-------------------------------------------------------$(RESET)"
+	@echo "$(VIOLET)|$(VIOLET) $(VIOLET)./so_long <map_folder>/<map_file>$(VIOLET)                   $(VIOLET)|$(VIOLET)$(RESET)"
+	@echo "$(VIOLET)|$(VIOLET) $(VIOLET) Example: ./so_long maps/map.ber$(VIOLET)                    $(VIOLET)|$(VIOLET)$(RESET)"
+	@echo "$(VIOLET)-------------------------------------------------------$(RESET)"
+	@echo "$(VIOLET)|$(VIOLET) $(CYAN) Use valid map files for testing$(CYAN)                    $(VIOLET)|$(VIOLET)$(RESET)"
+	@echo "$(VIOLET)-------------------------------------------------------$(RESET)"
+	@echo "$(VIOLET)|$(VIOLET) $(VIOLET) classic_map.ber$(VIOLET)                                    $(VIOLET)|$(VIOLET)$(RESET)"
+	@echo "$(VIOLET)|$(VIOLET) $(VIOLET) mini_map.ber$(VIOLET)                                       $(VIOLET)|$(VIOLET)$(RESET)"
+	@echo "$(VIOLET)|$(VIOLET) $(VIOLET) map_map.ber$(VIOLET)                                        $(VIOLET)|$(VIOLET)$(RESET)"
+	@echo "$(VIOLET)|$(VIOLET) $(VIOLET) big.ber$(VIOLET)                                            $(VIOLET)|$(VIOLET)$(RESET)"
+	@echo "$(VIOLET)-------------------------------------------------------$(RESET)"
+	@echo "$(VIOLET)|$(VIOLET) $(CYAN) Use invalid map files for checking$(CYAN)                  $(VIOLET)|$(VIOLET)$(RESET)"
+	@echo "$(VIOLET)-------------------------------------------------------$(RESET)"
+	@echo "$(VIOLET)|$(VIOLET) $(VIOLET) invalid_char.ber$(VIOLET)                                   $(VIOLET)|$(VIOLET)$(RESET)"
+	@echo "$(VIOLET)|$(VIOLET) $(VIOLET) invalid_coin_map.ber$(VIOLET)                               $(VIOLET)|$(VIOLET)$(RESET)"
+	@echo "$(VIOLET)|$(VIOLET) $(VIOLET) invalid_exit_map.ber$(VIOLET)                               $(VIOLET)|$(VIOLET)$(RESET)"
+	@echo "$(VIOLET)|$(VIOLET) $(VIOLET) invalid_position_map.ber$(VIOLET)                           $(VIOLET)|$(VIOLET)$(RESET)"
+	@echo "$(VIOLET)|$(VIOLET) $(VIOLET) invalid_size_map.ber$(VIOLET)                               $(VIOLET)|$(VIOLET)$(RESET)"
+	@echo "$(VIOLET)|$(VIOLET) $(VIOLET) invalid_wall_map.ber$(VIOLET)                               $(VIOLET)|$(VIOLET)$(RESET)"
+	@echo "$(VIOLET)|$(VIOLET) $(VIOLET) invalid_flood_fill_coin.ber$(VIOLET)                        $(VIOLET)|$(VIOLET)$(RESET)"
+	@echo "$(VIOLET)|$(VIOLET) $(VIOLET) invalid_flood_fill_exit.ber$(VIOLET)                        $(VIOLET)|$(VIOLET)$(RESET)"
+	@echo "$(VIOLET)|$(VIOLET) $(VIOLET) empty_map.ber$(VIOLET)                                      $(VIOLET)|$(VIOLET)$(RESET)"
+	@echo "$(VIOLET)-------------------------------------------------------$(RESET)"
+
 
 .PHONY: all clean fclean re help libft mlx

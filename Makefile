@@ -109,7 +109,7 @@ help:
 	@echo "$(VIOLET)|$(VIOLET) $(VIOLET) map_map.ber$(VIOLET)                                        $(VIOLET)|$(VIOLET)$(RESET)"
 	@echo "$(VIOLET)|$(VIOLET) $(VIOLET) big.ber$(VIOLET)                                            $(VIOLET)|$(VIOLET)$(RESET)"
 	@echo "$(VIOLET)-------------------------------------------------------$(RESET)"
-	@echo "$(VIOLET)|$(VIOLET) $(CYAN) Use invalid map files for checking$(CYAN)                  $(VIOLET)|$(VIOLET)$(RESET)"
+	@echo "$(VIOLET)|$(VIOLET) $(CYAN) Use invalid map files for testing$(CYAN)                  $(VIOLET)|$(VIOLET)$(RESET)"
 	@echo "$(VIOLET)-------------------------------------------------------$(RESET)"
 	@echo "$(VIOLET)|$(VIOLET) $(VIOLET) invalid_char.ber$(VIOLET)                                   $(VIOLET)|$(VIOLET)$(RESET)"
 	@echo "$(VIOLET)|$(VIOLET) $(VIOLET) invalid_coin_map.ber$(VIOLET)                               $(VIOLET)|$(VIOLET)$(RESET)"

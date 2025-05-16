@@ -61,3 +61,19 @@ int	checking_argument(char *str)
 		return (0);
 	return (1);
 }
+
+void	check_valid_images(t_game *data)
+{
+	if (!data->player->tank_up_1 || !data->player->tank_up_2
+		|| !data->player->tank_down_1 || !data->player->tank_down_2
+		|| !data->player->tank_left_1 || !data->player->tank_left_2
+		|| !data->player->tank_right_1 || !data->player->tank_right_2
+		|| !data->images->wall || !data->images->metal
+		|| !data->images->gerb || !data->images->coin_bomb
+		|| !data->images->coin_star || !data->images->background
+	)
+	{
+		ft_putstr_fd("❌ \033[31mError: Invalid image\e[0m\n", 2);
+		close_game(data);
+	}
+}

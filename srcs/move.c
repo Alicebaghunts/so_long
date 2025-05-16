@@ -50,6 +50,8 @@ void	show_moves(t_game *data)
 
 	count_str = ft_itoa(data->moves);
 	display_str = ft_strjoin("Moves: ", count_str);
+	mlx_put_image_to_window(data->mlx, data->win, data->images->wall, 0, 0);
+	mlx_put_image_to_window(data->mlx, data->win, data->images->wall, 64, 0);
 	mlx_string_put(data->mlx, data->win, 10, 10, 0xFFFFFF, display_str);
 	free(count_str);
 	free(display_str);

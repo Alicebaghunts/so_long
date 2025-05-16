@@ -30,11 +30,7 @@ void	init_characters(t_map_images *images, void *mlx)
 
 void	init_images_tank(t_player *tank, void *mlx)
 {
-	tank->tank_1 = mlx_xpm_file_to_image(mlx, "textures/tank_1.xpm", &tank->w,
-			&tank->h);
-	tank->tank_2 = mlx_xpm_file_to_image(mlx, "textures/tank_2.xpm", &tank->w,
-			&tank->h);
-	tank->tank_left_1 = mlx_xpm_file_to_image(mlx, "textures/tank_left_1.xpm",
+	tank->tank_left_1 = mlx_xpm_file_to_image(mlx, "textures/tank_left_2.xpm",
 			&tank->w, &tank->h);
 	tank->tank_left_2 = mlx_xpm_file_to_image(mlx, "textures/tank_left_2.xpm",
 			&tank->w, &tank->h);
@@ -61,7 +57,7 @@ void	put_img_mandatory(t_game *data)
 		mlx_put_image_to_window(data->mlx, data->win, data->images->background,
 			data->x * TILE_SIZE, data->y * TILE_SIZE);
 	else if (data->map->map[data->y][data->x] == 'P')
-		mlx_put_image_to_window(data->mlx, data->win, data->player->tank_1,
+		mlx_put_image_to_window(data->mlx, data->win, data->player->tank_up_1,
 			data->x * TILE_SIZE, data->y * TILE_SIZE);
 	else if (data->map->map[data->y][data->x] == 'E')
 		mlx_put_image_to_window(data->mlx, data->win, data->images->gerb,
@@ -83,7 +79,6 @@ void	put_images(t_game *data)
 		error_handling(MALLOC_ERROR);
 	init_characters(data->images, data->mlx);
 	init_images_tank(data->player, data->mlx);
-	putting(data);
 }
 
 void	putting(t_game *data)

@@ -18,13 +18,16 @@ void	render_map(t_map *map)
 
 	data = malloc_data(map);
 	data->mlx = mlx_init();
+	data->win = NULL;
 	if (!data->mlx)
 		close_game(data);
-	data->win = mlx_new_window(data->mlx, map->width * TILE_SIZE, map->height
-			* TILE_SIZE, "so_long");
+	put_images(data);
+	check_valid_images(data);
+	data->win = mlx_new_window(data->mlx, map->width * TILE_SIZE,
+			map->height * TILE_SIZE, "so_long");
 	if (!data->win)
 		close_game(data);
-	put_images(data);
+	putting(data);
 	find_player_position(data);
 	mlx_hook(data->win, 17, 0, close_game, data);
 	mlx_hook(data->win, 2, 1, &key_hook, data);

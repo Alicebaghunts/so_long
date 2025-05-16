@@ -24,6 +24,7 @@
 # define INVALID_FILE 3
 # define INVALID_MAP 4
 # define MALLOC_ERROR 5
+# define INVALID_IMAGE 6
 
 # define TANK_MOVE_ANIM_LIMIT 1024
 # define BULLET_SPEED 32
@@ -63,8 +64,6 @@ typedef struct s_map
 
 typedef struct s_player
 {
-	void	*tank_1;
-	void	*tank_2;
 	void	*tank_left_1;
 	void	*tank_left_2;
 	void	*tank_right_1;
@@ -154,5 +153,6 @@ t_game			*malloc_data(t_map *map);
 t_player		*malloc_tank(t_game *data);
 t_player		*malloc_tank(t_game *data);
 t_map_images	*malloc_img(t_game *data);
+void			check_valid_images(t_game *data);
 
 #endif

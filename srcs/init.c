@@ -22,6 +22,16 @@ void	init_map_first(t_map *map, int width, int height)
 	map->width = width;
 }
 
+int	check_extension(char *path)
+{
+	char	*dot;
+
+	dot = ft_strrchr(path, '.');
+	if (!dot || ft_strcmp(dot, ".ber"))
+		return (0);
+	return (1);
+}
+
 int	check_and_open_map_file(char *path)
 {
 	char	**split;
@@ -37,7 +47,13 @@ int	check_and_open_map_file(char *path)
 		ft_free_matrix(split);
 		error_handling(INVALID_PATH);
 	}
+	if (!check_extension(path))
+	{
+		ft_free_matrix(split);
+		error_handling(INVALID_PATH);
+	}
 	fd = open(split[0], O_RDONLY);
+	check_extension(path);
 	ft_free_matrix(split);
 	if (fd == -1)
 		error_handling(INVALID_FILE);

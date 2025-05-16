@@ -16,10 +16,10 @@ static void	tank_move_up_animation(t_game *data)
 {
 	data->player->tank_img = (data->player->tank_img + 1) % 2;
 	if (data->player->tank_img == 0)
-		mlx_put_image_to_window(data->mlx, data->win, data->player->tank_1,
+		mlx_put_image_to_window(data->mlx, data->win, data->player->tank_up_1,
 			data->player->x, data->player->y);
 	else
-		mlx_put_image_to_window(data->mlx, data->win, data->player->tank_2,
+		mlx_put_image_to_window(data->mlx, data->win, data->player->tank_up_2,
 			data->player->x, data->player->y);
 }
 
@@ -58,7 +58,7 @@ void	handle_move_up(t_game *data)
 	if (data->player->direction != UP)
 	{
 		data->player->direction = UP;
-		mlx_put_image_to_window(data->mlx, data->win, data->player->tank_1,
+		mlx_put_image_to_window(data->mlx, data->win, data->player->tank_up_1,
 			data->player->x, data->player->y);
 		return ;
 	}

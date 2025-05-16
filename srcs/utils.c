@@ -24,6 +24,8 @@ void	error_handling(int num)
 		ft_putstr_fd("❌ \033[31mError: Invalid map\e[0m\n", 2);
 	else if (num == 5)
 		ft_putstr_fd("❌ \033[31mError: Failed to malloc\e[0m\n", 2);
+	else if (num == 5)
+		ft_putstr_fd("❌ \033[31mError: Failed to malloc\e[0m\n", 2);
 	exit(num);
 }
 

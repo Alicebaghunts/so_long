@@ -16,10 +16,6 @@ void	free_tank_img(t_game *data)
 {
 	if (!data || !data->player)
 		return ;
-	if (data->player && data->player->tank_1)
-		mlx_destroy_image(data->mlx, data->player->tank_1);
-	if (data->player && data->player->tank_2)
-		mlx_destroy_image(data->mlx, data->player->tank_2);
 	if (data->player && data->player->tank_up_1)
 		mlx_destroy_image(data->mlx, data->player->tank_up_1);
 	if (data->player && data->player->tank_up_2)
